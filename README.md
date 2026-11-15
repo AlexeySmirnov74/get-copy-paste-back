@@ -7,6 +7,8 @@
 
 **Copy and paste not working in your remote Windows desktop? Copy text and files between your PC and the remote desktop again.**
 
+![Get Copy-Paste Back: files travel from your PC to a remote Windows desktop through a virtual camera when clipboard sharing is disabled.](docs/clipboard-camera-transfer.png)
+
 Get Copy-Paste Back sends your clipboard through the camera and sound paths in your existing remote desktop connection. Copy with **Ctrl+C**, wait for the ready signal, then paste with **Ctrl+V** on the other side. Text, images, files and folders work in both directions.
 
 **[Download the ready-to-use programs](https://github.com/AlexeySmirnov74/get-copy-paste-back/releases/latest)** — no compilation needed.
