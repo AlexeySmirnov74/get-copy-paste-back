@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="460" viewBox="0 0 960 460" role="img" aria-labelledby="title desc">
+  <title id="title">Copy a 1 MB file to the remote desktop in about 15 seconds</title>
+  <desc id="desc">Example: a 1 MB file travels from your computer to a remote Windows desktop through camera video in approximately 15 seconds at a measured transfer speed of 0.557 Mbit per second. The example uses the 1080p four-color mode with 4-pixel cells. Actual time depends on the connection; preparation and confirmation can add time.</desc>
+  <defs>
+    <style>
+      text { font-family: Arial, Helvetica, sans-serif; fill: #223322; }
+      .heading { font-size: 34px; font-weight: 700; }
+      .intro { font-size: 24px; fill: #4b6044; }
+      .label { font-size: 29px; font-weight: 700; text-anchor: middle; }
+      .small { font-size: 22px; fill: #4b6044; text-anchor: middle; }
+      .time { font-size: 38px; font-weight: 700; fill: #326b08; text-anchor: middle; }
+    </style>
+  </defs>
+  <rect width="960" height="460" rx="24" fill="#f6faf3"/>
+  <rect x="40" y="35" width="7" height="35" rx="3" fill="#60b515"/>
+  <text class="heading" x="62" y="64">A 1 MB file. About 15 seconds.</text>
+  <text class="intro" x="40" y="108">From your PC to the remote desktop.</text>
+
+  <rect x="40" y="143" width="250" height="216" rx="20" fill="#fff" stroke="#d9e7d2" stroke-width="2"/>
+  <rect x="670" y="143" width="250" height="216" rx="20" fill="#fff" stroke="#d9e7d2" stroke-width="2"/>
+
+  <g stroke="#326b08" stroke-width="4" stroke-linejoin="round" stroke-linecap="round">
+    <path d="M137 174h39l23 23v65h-62z" fill="#f0f7ea"/>
+    <path d="M176 174v23h23" fill="#eaf4e1"/>
+    <path d="M151 222h34m-34 13h34m-34 13h22" fill="none" stroke="#60b515"/>
+  </g>
+  <text class="label" x="165" y="302">1 MB file</text>
+  <text class="small" x="165" y="336">Your PC</text>
+
+  <g fill="none" stroke="#326b08" stroke-width="4" stroke-linecap="round" stroke-linejoin="round">
+    <rect x="737" y="181" width="116" height="75" rx="7" fill="#f0f7ea"/>
+    <path d="M738 244h114m-57 12v15m-18 0h36"/>
+    <circle cx="795" cy="213" r="20" fill="#60b515" stroke="#60b515"/>
+    <path d="m785 213 7 7 14-15" stroke="#fff"/>
+  </g>
+  <text class="label" x="795" y="302">Ready to paste</text>
+  <text class="small" x="795" y="336">Remote Windows</text>
+
+  <g fill="none" stroke="#326b08" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round">
+    <circle cx="480" cy="181" r="21" fill="#eaf4e1"/>
+    <path d="M480 160v-9m-8 0h16m10 14 6-6m-24 11v13l9 5"/>
+  </g>
+  <text class="time" x="480" y="249">&#x2248;15 seconds</text>
+  <path d="M320 283h313" fill="none" stroke="#60b515" stroke-width="7" stroke-linecap="round"/>
+  <path d="m626 269 25 14-25 14z" fill="#60b515"/>
+  <text class="small" x="480" y="325">Through camera video</text>
+
+  <text x="480" y="399" text-anchor="middle" font-size="22" fill="#326b08">1080p &#xB7; 4 colors &#xB7; 0.557 Mbit/s</text>
+  <text x="480" y="433" text-anchor="middle" font-size="18" fill="#4b6044">Example speed. Preparation and confirmation can add time.</text>
+</svg>

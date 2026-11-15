@@ -22,6 +22,8 @@ You need **64-bit Windows on both sides**, working camera and sound redirection,
 
 ![Copy on one computer, wait for confirmation, paste on the other. Camera pictures carry data to the remote desktop; sound carries data back.](docs/copy-paste-simple.svg)
 
+![Example: a 1 MB file reaches the remote Windows desktop through camera video in about 15 seconds at 0.557 Mbit/s.](docs/copy-paste-speed.svg)
+
 The server creates a virtual camera; you do not need to point a real webcam at your screen.
 
 ## Platform compatibility
