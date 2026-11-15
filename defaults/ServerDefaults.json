@@ -1,0 +1,14 @@
+{
+  "camera_name": "4k webcam",
+  "camera_name_mode": "random_from_catalog",
+  "camera_serial_prefix": "HorizonClient-",
+  "width": 1920,
+  "height": 1080,
+  "fps": 30,
+  "uncompressed": true,
+  "h264_probe": false,
+  "microphone": true,
+  "usb_port": 13260,
+  "video_port": 13261,
+  "loopback_only": true
+}

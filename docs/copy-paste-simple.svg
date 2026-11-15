@@ -1,0 +1,67 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="650" viewBox="0 0 960 650" role="img" aria-labelledby="title desc">
+  <title id="title">Get Copy-Paste Back: copy between two computers</title>
+  <desc id="desc">Run Server.exe on your local computer and Client.exe inside the remote desktop. Copies from your computer reach the remote desktop through camera video. Copies back to your computer travel through sound. In either direction, press Ctrl+C, wait for the ready signal, then press Ctrl+V on the other computer. Supports text, pictures, files and folders.</desc>
+  <defs>
+    <style>
+      text { font-family: Arial, Helvetica, sans-serif; fill: #223322; }
+      .heading { font-size: 36px; font-weight: 700; }
+      .intro { font-size: 26px; fill: #4b6044; }
+      .place { font-size: 32px; font-weight: 700; text-anchor: middle; }
+      .app { font-size: 32px; font-weight: 700; fill: #326b08; text-anchor: middle; }
+      .route { font-size: 24px; font-weight: 700; text-anchor: middle; }
+      .key { font-size: 34px; font-weight: 700; text-anchor: middle; }
+      .step { font-size: 26px; text-anchor: middle; fill: #4b6044; }
+      .footer { font-size: 25px; text-anchor: middle; fill: #4b6044; }
+    </style>
+    <g id="computer" fill="none" stroke="#326b08" stroke-width="4" stroke-linecap="round" stroke-linejoin="round">
+      <rect x="6" y="6" width="84" height="54" rx="6" fill="#f0f7ea"/>
+      <path d="M36 75h24M48 60v15M7 52h82"/>
+      <path d="M34 17h28v27H34z" fill="#fff"/>
+      <path d="M42 13h12v8H42z" fill="#60b515" stroke="#60b515"/>
+      <path d="M39 28h17m-5-4 5 4-5 4M57 37H40m5-4-5 4 5 4" stroke="#60b515" stroke-width="2.5"/>
+    </g>
+    <g id="camera" fill="none" stroke="#326b08" stroke-width="4" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M7 17h30a5 5 0 0 1 5 5v23a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5V22a5 5 0 0 1 5-5z" fill="#eaf4e1"/>
+      <path d="m42 27 18-10v33L42 40z" fill="#60b515"/>
+      <circle cx="16" cy="33" r="5" stroke="#60b515"/>
+    </g>
+    <g id="speaker" fill="none" stroke="#326b08" stroke-width="4" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M3 25h12L32 11v45L15 42H3z" fill="#eaf4e1"/>
+      <path d="M43 23a17 17 0 0 1 0 21M51 13a31 31 0 0 1 0 41" stroke="#60b515"/>
+    </g>
+  </defs>
+  <rect width="960" height="650" rx="24" fill="#f6faf3"/>
+  <rect x="40" y="39" width="7" height="35" rx="3" fill="#60b515"/>
+  <text class="heading" x="62" y="69">Get Copy-Paste Back</text>
+  <text class="intro" x="40" y="113">Copy on one computer. Paste on the other.</text>
+
+  <rect x="40" y="150" width="330" height="290" rx="20" fill="#fff" stroke="#d9e7d2" stroke-width="2"/>
+  <rect x="590" y="150" width="330" height="290" rx="20" fill="#fff" stroke="#d9e7d2" stroke-width="2"/>
+  <text class="place" x="205" y="199">Your computer</text>
+  <text class="place" x="755" y="199">Remote desktop</text>
+  <svg x="135" y="230" width="140" height="117" viewBox="0 0 96 80" aria-hidden="true"><use href="#computer"/></svg>
+  <svg x="685" y="230" width="140" height="117" viewBox="0 0 96 80" aria-hidden="true"><use href="#computer"/></svg>
+  <text class="app" x="205" y="397">Server.exe</text>
+  <text class="app" x="755" y="397">Client.exe</text>
+
+  <svg x="448" y="188" width="64" height="67" viewBox="0 0 64 67" aria-hidden="true"><use href="#camera"/></svg>
+  <text class="route" x="480" y="278">Camera / video</text>
+  <path d="M391 302h163" fill="none" stroke="#60b515" stroke-width="7" stroke-linecap="round"/>
+  <path d="m545 290 22 12-22 12z" fill="#60b515"/>
+  <svg x="448" y="326" width="64" height="67" viewBox="0 0 64 67" aria-hidden="true"><use href="#speaker"/></svg>
+  <text class="route" x="480" y="405">Sound</text>
+  <path d="M569 425H406" fill="none" stroke="#60b515" stroke-width="7" stroke-linecap="round"/>
+  <path d="m415 413-22 12 22 12z" fill="#60b515"/>
+
+  <rect x="40" y="479" width="264" height="111" rx="17" fill="#fff" stroke="#d9e7d2" stroke-width="2"/>
+  <rect x="348" y="479" width="264" height="111" rx="17" fill="#eaf4e1" stroke="#60b515" stroke-width="2"/>
+  <rect x="656" y="479" width="264" height="111" rx="17" fill="#fff" stroke="#d9e7d2" stroke-width="2"/>
+  <text class="key" x="172" y="526">Ctrl+C</text>
+  <text class="step" x="172" y="564">Copy</text>
+  <text class="key" x="480" y="526">Wait</text>
+  <text class="step" x="480" y="564">Ready signal</text>
+  <text class="key" x="788" y="526">Ctrl+V</text>
+  <text class="step" x="788" y="564">Paste</text>
+  <path d="m318 527 13 9-13 9m308-18 13 9-13 9" fill="none" stroke="#326b08" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+  <text class="footer" x="480" y="629">Text, pictures, files and folders</text>
+</svg>

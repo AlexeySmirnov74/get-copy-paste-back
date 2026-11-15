@@ -1,0 +1,136 @@
+Horizon third-party components and retained notices
+
+This notice describes the Horizon standalone build inputs. Component licenses
+apply to their respective material; they do not specify a project-wide license
+for the original Horizon application. Preserve the full license texts, source
+pins, notices and Quiet source/relink materials when redistributing this package.
+The public source repository also documents these materials in
+docs/THIRD-PARTY.md.
+
+EXPLICIT EXPORT FROM THE APPLICATION EXES
+
+Both applications embed Audio-Licenses.zip, quiet-source.zip, quiet-relink.zip,
+and the MP4Modem license/integration notice. HorizonServer additionally embeds
+ThirdPartyNotices.zip with the native backend notices and retained license tree.
+Use --export-third-party with an absolute destination directory to export them.
+Export is caller-directed; these materials are not extracted on normal startup.
+
+USBBridge CAMERA BACKEND
+
+USBBridge applications and USB/IP implementation are Rust code, MIT.
+  https://github.com/AlexeySmirnov74/USB-to-Network-Bridge
+  Horizon fork component version 0.2.21; corresponding source: native/usbbridge/.
+  Full license: USBBridge-LICENSE.txt; pinned binary identity: PROVENANCE.txt.
+The backend uses the static CRT. Its public ioctl constants and structure
+layouts follow the VirtualBox usblib-win.h ABI; no usbipd-win C# implementation
+is compiled into the Rust camera backend. Original USBBridge SVG, PNG and ICO
+artwork retains its project's MIT license; the native source retains its icon.
+
+OFFLINE DRIVER INSTALLER INCLUDED WITH HORIZONSERVER
+
+USBIP-WIN2 0.9.8.1, BSD-2-Clause.
+  https://github.com/vadimgrn/usbip-win2/releases/tag/v.0.9.8.1
+  https://github.com/vadimgrn/usbip-win2/tree/v.0.9.8.1
+  Installer: runtime/drivers/USBip-0.9.8.1-x64.exe, unchanged signed upstream file.
+  SHA-256: 38CAD6D4432B52D5BB9409D9AD03B72FDFFC4ADA4CD3A48FBECA1A2752A8518A
+  Full license: licenses/drivers/usbip-win2/LICENSE.txt.
+The installer provides the virtual host controller and companion filter driver.
+The camera backend calls their public control ABI; the driver's WSK transport
+handles USB payloads in the Windows kernel. The installer also embeds the
+Microsoft Visual C++ Redistributable, retaining Microsoft's original terms.
+No third-party kernel binary is modified. Installation is an explicit server
+setup operation; normal application startup has no download fallback.
+
+NATIVE AUDIO MODEMS
+
+Quiet, BSD-3-Clause; liquid-dsp and Jansson, MIT; libfec, LGPL-2.1.
+  Exact upstream commits and archive locations: third_party/quiet/SOURCES.json.
+  Full original licenses, local change record and toolchain notices:
+  third_party/quiet/ and the embedded Audio-Licenses.zip.
+  Corresponding source and adapter build scripts: quiet-source.zip.
+  Matching adapter/Quiet objects, dependency libraries and replacement libfec
+  relink helper: quiet-relink.zip.
+The LLVM and MinGW-w64 compiler/startup support notices are retained verbatim
+in third_party/quiet/toolchain-licenses/. The Quiet DLL can be replaced in its
+extracted audio-native directory. Users may modify, debug and reverse engineer
+this native component as needed to exercise their rights under its licenses.
+
+aicodix modem, dsp and code snapshots, Zero-Clause BSD (0BSD).
+  modem: 6f0ff063a94b28487822c57ba921aebe82abf7ac
+  dsp: f268a558e801cbe10a986a17d7d09985673e159d
+  code: adb760f338f39d7a2d29628b2edca331f887c5e3
+  https://github.com/aicodix/modem
+  https://github.com/aicodix/dsp
+  https://github.com/aicodix/code
+  Full licenses, file hashes and the MSVC compatibility change record:
+  third_party/aicodix/ and the embedded Audio-Licenses.zip.
+The Windows x64 audio DLLs use statically linked C/C++ runtime support.
+
+MP4MODEM VISUAL TRANSPORT PORT
+
+  https://github.com/grmchn/mp4modem
+  Commit b3f2d2d1fdbba17104ba473170f7111100e10aea, Apache-2.0.
+  Modified C# port of the four-basis waveform, tags, pilots, CRC, Reed-Solomon
+  and interleave; independent Horizon packet adapter. MP4 containers and
+  upstream Payload Bundles are not implemented.
+  Original sources, full license, golden vectors and pinned Git blob hashes:
+  third_party/mp4modem/. Both EXEs embed the license and integration notice.
+
+MICROSOFT WEBVIEW2 NATIVE LOADER
+
+Microsoft.Web.WebView2 SDK 1.0.3537.50, BSD-3-Clause, Microsoft Corporation.
+  https://www.nuget.org/packages/Microsoft.Web.WebView2/1.0.3537.50
+  Build-time package/member SHA-256 pins: native/usbbridge/webview2-sdk.json.
+  Unmodified SDK license and notices: licenses/webview2-sdk/.
+Only the native loader is statically linked into the backend. The SDK is a
+native rebuild dependency. The separately installed WebView2 Runtime has its
+own Microsoft terms. The application does not download that Runtime.
+
+RUST DEPENDENCIES
+
+native/usbbridge/Cargo.lock records exact versions and registry checksums;
+licenses/ retains the license texts for the Windows backend dependency set:
+  socket2 0.6.5; base64 0.22.1; native-tls 0.2.18;
+  windows-sys 0.61.2; windows-link 0.2.1;
+  serde/serde_core/serde_derive 1.0.229; serde_json 1.0.154;
+  uuid 1.29.0; getrandom 0.4.3; cfg-if 1.0.5; itoa 1.0.18;
+  proc-macro2 1.0.107; quote 1.0.47; syn 3.0.9;
+  hmac 0.12.1; sha2 0.10.9; block-buffer 0.10.4; crypto-common 0.1.7;
+  digest 0.10.7; cpufeatures 0.2.17;
+  typenum 1.20.1; version_check 0.9.5: MIT OR Apache-2.0.
+  schannel 0.1.30, zmij 1.0.23 and generic-array 0.14.7: MIT.
+  memchr 2.8.3: Unlicense OR MIT.
+  jpeg-encoder 0.7.1: (MIT OR Apache-2.0) AND IJG.
+  subtle 2.6.1: BSD-3-Clause.
+  unicode-ident 1.0.27: (MIT OR Apache-2.0) AND Unicode-3.0.
+Cargo.lock also resolves packages for other targets and tooling; their presence
+in the lockfile does not mean their binaries are included in this Windows build.
+
+RETAINED UPSTREAM NOTICES FOR COMPONENTS NOT BUNDLED BY HORIZON
+
+The inherited license tree keeps the following upstream notices for provenance.
+Horizon does not bundle the usbipd-win server MSI, VirtualBox driver files or the
+Unity Capture filter/producer. These notices do not imply those binaries exist
+in the Horizon package:
+
+usbipd-win 5.3.0, GPL-3.0-only; VirtualBox 7.2.2 VBoxUSB/VBoxUSBMon notices.
+  https://github.com/dorssel/usbipd-win/releases/tag/v5.3.0
+  https://github.com/dorssel/usbipd-win/tree/v5.3.0/Drivers
+  VirtualBox corresponding source:
+  https://download.virtualbox.org/virtualbox/7.2.2/VirtualBox-7.2.2.tar.bz2
+  Retained full license texts and driver notices: licenses/drivers/usbipd-win/.
+  No separate driver-sources archive is claimed for this Horizon release.
+
+Unity Capture x64 filter, MIT, Copyright (c) 2018 Bernhard Schelling;
+based on UnityCam, Copyright (c) 2016 MHD Yamen Saraiji.
+  https://github.com/schellingb/UnityCapture
+  Retained full notice: licenses/unity-capture/.
+  The separate Unity producer plugin/assets use zlib and are not included.
+
+OPTIONAL RESEARCH BACKEND
+
+native/usbbridge/src/usbdk.rs contains an optional UsbDk C API adapter.
+  https://github.com/daynix/UsbDk (Apache-2.0).
+The production Horizon package does not download, install or bundle UsbDk.
+Development caches, local vendor experiments and test-signed driver packages
+are outside the public source/runtime allowlist.

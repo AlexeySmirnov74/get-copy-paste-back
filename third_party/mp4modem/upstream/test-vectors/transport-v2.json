@@ -1,0 +1,50 @@
+{
+  "schemaVersion": 1,
+  "crc32": {
+    "inputUtf8": "123456789",
+    "expectedHex": "cbf43926"
+  },
+  "bundle": {
+    "title": "Example",
+    "createdAt": "1980-01-01T00:00:00Z",
+    "entries": [
+      {
+        "path": "a.txt",
+        "dataUtf8": "hello"
+      },
+      {
+        "path": "b.json",
+        "dataUtf8": "{\"ok\":true}"
+      }
+    ],
+    "expectedBytes": 718,
+    "expectedSha256": "c118de01c259019a7235418216192efc13160ef2b71802da973e13c29af6375a",
+    "expectedFecBytes": 1020,
+    "expectedFecSha256": "a41627d22da8338dc765be77228c96580f7fb0cea9777910839a2bc89dd728b7"
+  },
+  "tag": {
+    "profileId": 129,
+    "epoch": 7,
+    "phase": 2,
+    "flags": 0,
+    "symbolId": 12345,
+    "expectedHex": "4d3202810007020000003039d8e867e3"
+  },
+  "basisFrame": {
+    "payloadFormula": "byte[i] = (i * 37) mod 256",
+    "expectedBytes": 1382400,
+    "expectedSha256": "678a62001e87d7b9c6bdffb99f8eb65d2c0fd6b41171442e79d31c89b71a49d3"
+  },
+  "reedSolomon": {
+    "parameters": {
+      "n": 255,
+      "k": 191,
+      "primitivePolynomialHex": "11d",
+      "generator": 2,
+      "firstConsecutiveRoot": 0,
+      "symbolBits": 8
+    },
+    "messageFormula": "byte[i] = i for i = 0..190",
+    "expectedCodewordSha256": "28a63541dcec4e03805a3a66c05fc5bc8efa595a4f339290ccedb7067a60be10"
+  }
+}

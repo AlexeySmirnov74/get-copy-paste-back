@@ -1,0 +1,92 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1320" height="660" viewBox="0 0 1320 660" role="img" aria-labelledby="title desc">
+  <title id="title">Get Copy-Paste Back: current data paths</title>
+  <desc id="desc">Local-to-remote data travels from the local clipboard through Server.exe, a virtual camera, Horizon RTAV, and Client.exe to the remote clipboard. Remote-to-local data travels from Client.exe through a selected remote audio output, Horizon playback audio, Windows loopback capture of all local outputs or one selected output, and Server.exe to the local clipboard. Short delivery receipts can share the return audio path.</desc>
+  <defs>
+    <marker id="blue-arrow" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto" markerUnits="userSpaceOnUse"><path d="M0 0 L10 5 L0 10 Z" fill="#1967b3"/></marker>
+    <marker id="green-arrow" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto" markerUnits="userSpaceOnUse"><path d="M0 0 L10 5 L0 10 Z" fill="#147b65"/></marker>
+    <style>
+      text { font-family: Arial, Helvetica, sans-serif; fill: #172b44; }
+      .title { font-size: 28px; font-weight: 700; }
+      .subtitle { font-size: 17px; fill: #4a6078; }
+      .lane { font-size: 20px; font-weight: 700; }
+      .label { font-size: 18px; font-weight: 700; text-anchor: middle; }
+      .small { font-size: 16px; text-anchor: middle; fill: #405971; }
+      .place { font-size: 14px; font-weight: 700; text-anchor: middle; letter-spacing: 1px; }
+      .blue { fill: #1967b3; }
+      .green { fill: #147b65; }
+    </style>
+  </defs>
+  <rect width="1320" height="660" rx="18" fill="#fff"/>
+  <text x="38" y="47" class="title">Get Copy-Paste Back · Copy. Wait for delivery. Paste.</text>
+  <text x="38" y="77" class="subtitle">Server.exe is on your local PC. Client.exe is inside the remote desktop.</text>
+
+  <rect x="25" y="108" width="1270" height="206" rx="16" fill="#f1f7fe" stroke="#d3e4f7"/>
+  <text x="44" y="142" class="lane blue">1  Local PC → remote desktop</text>
+  <text x="44" y="169" class="subtitle">Clipboard content becomes camera images.</text>
+
+  <rect x="44" y="198" width="215" height="83" rx="10" fill="#fff" stroke="#87b4e1" stroke-width="2"/>
+  <text x="151" y="225" class="label">Local clipboard</text>
+  <text x="151" y="250" class="small">Server.exe</text>
+  <text x="151" y="272" class="place blue">LOCAL PC</text>
+  <path d="M260 238 H285" fill="none" stroke="#1967b3" stroke-width="3" marker-end="url(#blue-arrow)"/>
+
+  <rect x="294" y="198" width="215" height="83" rx="10" fill="#fff" stroke="#87b4e1" stroke-width="2"/>
+  <text x="401" y="225" class="label">Virtual camera</text>
+  <text x="401" y="250" class="small">Encoded video frames</text>
+  <text x="401" y="272" class="place blue">LOCAL PC</text>
+  <path d="M510 238 H535" fill="none" stroke="#1967b3" stroke-width="3" marker-end="url(#blue-arrow)"/>
+
+  <rect x="544" y="198" width="215" height="83" rx="10" fill="#dcecff" stroke="#87b4e1" stroke-width="2"/>
+  <text x="651" y="225" class="label">Horizon RTAV</text>
+  <text x="651" y="250" class="small">Camera redirection</text>
+  <text x="651" y="272" class="place blue">HORIZON SESSION</text>
+  <path d="M760 238 H785" fill="none" stroke="#1967b3" stroke-width="3" marker-end="url(#blue-arrow)"/>
+
+  <rect x="794" y="198" width="215" height="83" rx="10" fill="#fff" stroke="#87b4e1" stroke-width="2"/>
+  <text x="901" y="225" class="label">Client.exe</text>
+  <text x="901" y="250" class="small">Decode + verify</text>
+  <text x="901" y="272" class="place blue">REMOTE DESKTOP</text>
+  <path d="M1010 238 H1035" fill="none" stroke="#1967b3" stroke-width="3" marker-end="url(#blue-arrow)"/>
+
+  <rect x="1044" y="198" width="230" height="83" rx="10" fill="#fff" stroke="#87b4e1" stroke-width="2"/>
+  <text x="1159" y="225" class="label">Remote clipboard</text>
+  <text x="1159" y="250" class="small">Ready for Ctrl+V</text>
+  <text x="1159" y="272" class="place blue">REMOTE DESKTOP</text>
+
+  <rect x="25" y="336" width="1270" height="206" rx="16" fill="#f0f9f5" stroke="#cee9dd"/>
+  <text x="44" y="370" class="lane green">2  Local PC ← remote desktop</text>
+  <text x="44" y="397" class="subtitle">Clipboard content becomes modem sound. Read this row from right to left.</text>
+
+  <rect x="44" y="426" width="215" height="83" rx="10" fill="#fff" stroke="#78b8a7" stroke-width="2"/>
+  <text x="151" y="453" class="label">Local clipboard</text>
+  <text x="151" y="478" class="small">Server.exe</text>
+  <text x="151" y="500" class="place green">LOCAL PC</text>
+  <path d="M286 466 H268" fill="none" stroke="#147b65" stroke-width="3" marker-end="url(#green-arrow)"/>
+
+  <rect x="294" y="426" width="215" height="83" rx="10" fill="#fff" stroke="#78b8a7" stroke-width="2"/>
+  <text x="401" y="453" class="label">Windows loopback</text>
+  <text x="401" y="478" class="small">All or selected outputs</text>
+  <text x="401" y="500" class="place green">LOCAL PC</text>
+  <path d="M536 466 H518" fill="none" stroke="#147b65" stroke-width="3" marker-end="url(#green-arrow)"/>
+
+  <rect x="544" y="426" width="215" height="83" rx="10" fill="#dff2e9" stroke="#78b8a7" stroke-width="2"/>
+  <text x="651" y="453" class="label">Horizon audio</text>
+  <text x="651" y="478" class="small">Remote sound playback</text>
+  <text x="651" y="500" class="place green">HORIZON SESSION</text>
+  <path d="M786 466 H768" fill="none" stroke="#147b65" stroke-width="3" marker-end="url(#green-arrow)"/>
+
+  <rect x="794" y="426" width="215" height="83" rx="10" fill="#fff" stroke="#78b8a7" stroke-width="2"/>
+  <text x="901" y="453" class="label">Selected audio output</text>
+  <text x="901" y="478" class="small">FSK / Quiet / aicodix</text>
+  <text x="901" y="500" class="place green">REMOTE DESKTOP</text>
+  <path d="M1036 466 H1018" fill="none" stroke="#147b65" stroke-width="3" marker-end="url(#green-arrow)"/>
+
+  <rect x="1044" y="426" width="230" height="83" rx="10" fill="#fff" stroke="#78b8a7" stroke-width="2"/>
+  <text x="1159" y="453" class="label">Remote clipboard</text>
+  <text x="1159" y="478" class="small">Client.exe</text>
+  <text x="1159" y="500" class="place green">REMOTE DESKTOP</text>
+
+  <rect x="25" y="563" width="1270" height="72" rx="12" fill="#fff7e6" stroke="#e6c987"/>
+  <text x="44" y="591" font-size="17" font-weight="700">Delivery control uses the same routes.</text>
+  <text x="44" y="617" font-size="16">Short audio receipts can confirm the remote clipboard is ready; video acknowledges reverse copies. No extra bulk channel.</text>
+</svg>

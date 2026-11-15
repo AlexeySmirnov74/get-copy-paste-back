@@ -1,0 +1,369 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="dark">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'unsafe-inline'; style-src 'unsafe-inline'; img-src 'none'; media-src blob:; connect-src 'none'; frame-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'">
+<title>Camera WebView inspection</title>
+<style>
+:root{font:15px/1.5 "Segoe UI",system-ui,sans-serif;color:#e6edf5;background:#101720;color-scheme:dark;--panel:#18222f;--line:#344558;--muted:#a6b5c6;--accent:#42c8df}
+*{box-sizing:border-box}body{margin:0;padding:24px;max-width:1500px;margin-inline:auto}h1{font-size:25px;line-height:1.25;margin:0 0 8px}h2{font-size:18px;margin:0 0 14px}p{margin:7px 0;color:var(--muted)}button,select,textarea{font:inherit}button,select{min-height:42px;border:1px solid var(--line);border-radius:7px;background:#202e3e;color:inherit;padding:8px 13px}button{cursor:pointer;white-space:normal}button:hover:enabled{background:#293d51;border-color:var(--accent)}button.primary{background:var(--accent);border-color:var(--accent);color:#08212b;font-weight:600}button:disabled,select:disabled{opacity:.43;cursor:default}button:focus-visible,select:focus-visible,summary:focus-visible,textarea:focus-visible{outline:2px solid var(--accent);outline-offset:3px}select{width:100%;text-overflow:ellipsis}label{display:block;margin-bottom:6px;font-weight:600}.card{background:var(--panel);border:1px solid #263646;border-radius:10px;padding:19px;margin-top:18px}.toolbar{display:flex;flex-wrap:wrap;gap:10px;margin-top:14px}.selection{display:grid;grid-template-columns:minmax(0,1fr);gap:14px;align-items:end}.native{font-size:14px;border-left:3px solid #6b7e96;padding-left:12px}.native strong{color:#edf3fb;overflow-wrap:anywhere}.note{font-size:13px}#status{min-height:24px;margin-top:15px;color:#c7d9ed}#status.error{color:#ffb6b6}#preview{display:block;width:100%;max-height:380px;object-fit:contain;background:#070c11;border-radius:7px}#previewBox[hidden]{display:none}.two{display:grid;grid-template-columns:1fr 1fr;gap:18px}.two>.card{min-width:0}.tableWrap{overflow:auto;max-height:340px}table{border-collapse:collapse;width:100%;text-align:left}th,td{border-bottom:1px solid var(--line);padding:9px 10px;vertical-align:top}th{color:#b9cde1;position:sticky;top:0;background:var(--panel)}td{overflow-wrap:anywhere}td:first-child{min-width:120px}code,pre,textarea{font-family:Consolas,"Cascadia Code",monospace;font-size:13px}pre{margin:0;white-space:pre-wrap;overflow-wrap:anywhere;max-height:340px;overflow:auto}details{margin-top:15px}summary{cursor:pointer;color:#c9dcef;padding:5px 0}details p{margin:6px 0}#json{width:100%;height:260px;resize:vertical;background:#0d141d;color:#d5e7f8;border:1px solid var(--line);border-radius:6px;padding:12px}.value{color:#e6edf5}.badge{display:inline-block;color:#a8ead3;font-size:13px;margin-left:7px}.empty{color:var(--muted)}#unsupported{font-size:13px}#close{margin-left:auto}@media(max-width:800px){body{padding:16px}.two{grid-template-columns:1fr;gap:0}.selection{grid-template-columns:1fr}.toolbar button{flex:1 1 160px}h1{font-size:22px}.card{padding:15px}}@media(prefers-reduced-motion:reduce){*{scroll-behavior:auto}}
+</style>
+</head>
+<body>
+<header>
+  <h1 data-i18n="title">Camera WebView inspection</h1>
+  <p data-i18n="intro">Inspect the camera data this WebView actually exposes to a website. Video stays on this PC.</p>
+</header>
+<section class="card" aria-labelledby="selectTitle">
+  <h2 id="selectTitle" data-i18n="choose">Camera selection</h2>
+  <div class="native" id="nativeHint"><span data-i18n="requested">Selected in Windows (hint, not Web API data):</span><br><strong id="requestedName">—</strong><p class="note" data-i18n="mapping">Web camera IDs are opaque. Match the camera by its displayed name; identical names require an explicit choice.</p></div>
+  <div class="selection" style="margin-top:15px">
+    <div><label for="camera" data-i18n="camera">Camera exposed by WebView</label><select id="camera"><option value="" data-i18n="select">Select a camera…</option></select></div>
+  </div>
+  <p id="permissionNote" class="note"></p>
+  <div class="toolbar">
+    <button id="website" data-i18n="website">Website access check</button><button id="permission" hidden data-i18n="requestPermission">Request camera permission</button><button id="start" class="primary" disabled data-i18n="start">Start inspection</button><button id="stop" disabled data-i18n="stop">Stop camera</button><button id="refresh" data-i18n="refresh">Refresh devices</button><button id="copy" disabled data-i18n="copy">Copy JSON</button><button id="save" hidden disabled data-i18n="save">Save JSON…</button><button id="close" data-i18n="close">Close</button>
+  </div>
+  <div id="status" role="status" aria-live="polite"></div>
+  <p id="unsupported" hidden></p>
+</section>
+<section class="card" id="comparison" hidden><h2 data-i18n="comparison">Website camera request</h2><p class="note" data-i18n="siteExplanation"></p><div class="two"><div><h2 data-i18n="beforePermission">Before camera permission</h2><pre id="beforePermission"></pre></div><div><h2 data-i18n="afterPermission">After camera permission</h2><pre id="afterPermission">—</pre></div></div></section>
+<section class="card"><p class="note" data-i18n="deviceScope"></p><pre id="deviceAccess"></pre><p id="reportWarning" class="note" role="status" hidden></p></section>
+<section id="previewBox" class="card" hidden><h2 data-i18n="preview">Local preview</h2><video id="preview" autoplay muted playsinline></video><p class="note" data-i18n="previewNote">The selected frame rate is a camera setting, not a measured delivery rate. No frames or audio are recorded.</p></section>
+<div class="two">
+  <section class="card"><h2 data-i18n="settings">Actual track settings</h2><pre id="settings" class="empty">—</pre></section>
+  <section class="card"><h2 data-i18n="capabilities">Track capabilities</h2><pre id="capabilities" class="empty">—</pre></section>
+</div>
+<section class="card"><h2 data-i18n="devices">WebView device inventory</h2><p class="note" data-i18n="audioNote">Microphones are listed only. This tool never requests microphone access or captures audio.</p><div class="tableWrap"><table><thead><tr><th data-i18n="kind">Kind</th><th data-i18n="name">Name</th><th>deviceId</th><th>groupId</th></tr></thead><tbody id="devices"></tbody></table></div></section>
+<section class="card"><h2 data-i18n="report">Full report</h2><p class="note" data-i18n="privacy">The report contains device names and browser-scoped identifiers. Copy or save it only when you want to share those details.</p><textarea id="json" readonly spellcheck="false" aria-label="JSON report"></textarea><details><summary data-i18n="limitationsTitle">What this report does and does not identify</summary><p data-i18n="limitations">deviceId and groupId are browser-scoped values, not USB serial numbers. Web APIs do not expose the Windows PnP path or driver version as dedicated fields. A label may include a model VID:PID. No standard Web API flag proves that a camera is physical or virtual. Unavailable capabilities mean the API did not expose them, not that the device lacks them.</p><p data-i18n="permissionLimit">Names, IDs and capabilities depend on camera permission, WebView2 version, driver and website origin. Telegram or another application can expose a different result. This is a local WebView2 measurement, not an emulation of Telegram.</p></details></section>
+<script>
+'use strict';
+(function () {
+  const strings = {
+    en: {
+      copying:"Copying the JSON report…",saving:"Choose where to save the JSON report…",cancelled:"Save cancelled.",actionFailed:"The operation failed.",
+      title:'Camera WebView inspection',intro:'Inspect the camera data this WebView actually exposes to a website. Video stays on this PC.',choose:'Camera selection',requested:'Selected in Windows (hint, not Web API data):',mapping:'Web camera IDs are opaque. Match the camera by its displayed name; identical names require an explicit choice.',camera:'Camera exposed by WebView',select:'Select a camera…',permissionNote:'The host permits camera access only for this local inspection origin. If names remain hidden, check Windows camera privacy and refresh. No default camera will be opened.',start:'Start inspection',stop:'Stop camera',refresh:'Refresh devices',copy:'Copy JSON',save:'Save JSON…',close:'Close',preview:'Local preview',previewNote:'The selected frame rate is a camera setting, not a measured delivery rate. No frames or audio are recorded.',settings:'Actual track settings',capabilities:'Track capabilities',devices:'WebView device inventory',audioNote:'Microphones are listed only. This tool never requests microphone access or captures audio.',kind:'Kind',name:'Name',report:'Full report',privacy:'The report contains device names and browser-scoped identifiers. Copy or save it only when you want to share those details.',limitationsTitle:'What this report does and does not identify',limitations:'deviceId and groupId are browser-scoped values, not USB serial numbers. Web APIs do not expose the Windows PnP path or driver version as dedicated fields. A label may include a model VID:PID. No standard Web API flag proves that a camera is physical or virtual. Unavailable capabilities mean the API did not expose them, not that the device lacks them.',permissionLimit:'Names, IDs and capabilities depend on camera permission, WebView2 version, driver and website origin. The IDs here belong to this local origin/profile and are not Telegram IDs. Telegram or another application can expose a different result. This is a local WebView2 measurement, not an emulation of Telegram.',ready:'Select a camera, then start inspection.',matched:'A unique name match was found. Confirm the camera, then start inspection.',ambiguous:'Several cameras match the Windows hint. Select the intended camera explicitly.',unmatched:'No unique WebView match was found. Choose the camera explicitly; another source will not be substituted.',needPermission:'Camera names are hidden. Check Windows camera privacy and refresh; no default camera will be opened.',opening:'Opening the selected camera…',running:'Inspection running. Only the selected camera is open.',stopped:'Camera stopped. The last report is retained.',refreshed:'Device list refreshed.',copied:'JSON report copied.',copyFailed:'Copy was unavailable. Select and copy the JSON text below.',saved:"JSON report saved.",unsupported:'Camera APIs are unavailable. This page must run in a secure WebView2 origin with camera access enabled.',missing:'No cameras were exposed by WebView.',hidden:'Camera {n} (name hidden)',disconnected:'The selected camera was disconnected. No other camera was selected.',chooseNamed:'Choose a named camera before inspection.',denied:'Camera access was denied. Check Windows camera privacy and the WebView permission.',busy:'The camera could not be opened. It may be busy, disconnected or unavailable locally while shared with a USB client.',notFound:'The selected camera is no longer available. Refresh the list.',constraint:'The requested camera identity could not be opened. Refresh and select it again.',error:'Camera inspection failed',notConfigured:'Waiting for the server…',reportTooLarge:'The report exceeded the local size limit.',audioinput:'Microphone',audiooutput:'Speaker',videoinput:'Camera',nameHidden:'Name hidden',noDevices:'No devices were exposed.',busyAction:'Finish the current operation first.'
+    },
+    ru: {
+      copying:"Копирование JSON-отчёта…",saving:"Выберите место для сохранения JSON-отчёта…",cancelled:"Сохранение отменено.",actionFailed:"Не удалось выполнить действие.",
+      title:'Проверка камеры через WebView',intro:'Показывает сведения о камере, которые этот WebView действительно предоставляет сайту. Видео остаётся на этом ПК.',choose:'Выбор камеры',requested:'Выбрана на сервере (подсказка Windows, не данные Web API):',mapping:'Идентификаторы камер WebView непрозрачны. Сопоставляйте камеры по имени; при одинаковых именах нужен явный выбор.',camera:'Камера в WebView',select:'Выберите камеру…',permissionNote:'Приложение разрешает камеру только для локального адреса проверки. Если имена скрыты, проверьте разрешения камеры Windows и обновите список. Камера по умолчанию не открывается.',start:'Начать проверку',stop:'Остановить камеру',refresh:'Обновить устройства',copy:'Копировать JSON',save:'Сохранить JSON…',close:'Закрыть',preview:'Локальный просмотр',previewNote:'Заданная частота кадров — настройка камеры, а не измеренная скорость получения. Кадры и звук не записываются.',settings:'Фактические настройки потока',capabilities:'Возможности потока',devices:'Устройства, доступные WebView',audioNote:'Микрофоны только перечисляются. Этот инструмент не запрашивает доступ к микрофону и не захватывает звук.',kind:'Тип',name:'Название',report:'Полный отчёт',privacy:'Отчёт содержит имена устройств и идентификаторы в области браузера. Копируйте или сохраняйте его, только если хотите передать эти сведения.',limitationsTitle:'Что позволяет и не позволяет определить отчёт',limitations:'deviceId и groupId относятся к области браузера и не являются серийными номерами USB. Web API не предоставляет путь Windows PnP и версию драйвера отдельными полями. Имя может включать VID:PID модели. Стандартного флага Web API для физической или виртуальной камеры нет. Недоступность возможностей означает, что API их не раскрыл, а не что устройство их не поддерживает.',permissionLimit:'Имена, ID и возможности зависят от разрешений камеры, версии WebView2, драйвера и адреса сайта. Эти ID относятся к локальному адресу и профилю, а не к Telegram. Telegram или другое приложение может предоставить иной результат. Это локальный замер WebView2, а не эмуляция Telegram.',ready:'Выберите камеру и начните проверку.',matched:'Найдено единственное совпадение имени. Проверьте выбор и начните проверку.',ambiguous:'Подсказке Windows соответствуют несколько камер. Явно выберите нужную.',unmatched:'Однозначное соответствие WebView не найдено. Выберите камеру явно; другой источник автоматически не подставляется.',needPermission:'Имена камер скрыты. Проверьте разрешения камеры Windows и обновите список; камера по умолчанию не открывается.',opening:'Открытие выбранной камеры…',running:'Проверка идёт. Открыта только выбранная камера.',stopped:'Камера остановлена. Последний отчёт сохранён в окне.',refreshed:'Список устройств обновлён.',copied:'JSON-отчёт скопирован.',copyFailed:'Копирование недоступно. Выделите и скопируйте JSON ниже.',saved:"JSON-отчёт сохранён.",unsupported:'API камеры недоступен. Страница должна открываться через безопасный адрес WebView2 с разрешённым доступом к камере.',missing:'WebView не предоставил ни одной камеры.',hidden:'Камера {n} (имя скрыто)',disconnected:'Выбранная камера отключена. Другая камера не выбрана.',chooseNamed:'Перед проверкой выберите именованную камеру.',denied:'Доступ к камере запрещён. Проверьте разрешения камеры Windows и WebView.',busy:'Камеру не удалось открыть. Она может быть занята, отключена или недоступна локально при передаче USB-клиенту.',notFound:'Выбранная камера больше недоступна. Обновите список.',constraint:'Не удалось открыть камеру с выбранным ID. Обновите список и выберите её снова.',error:'Ошибка проверки камеры',notConfigured:'Ожидание настроек сервера…',reportTooLarge:'Отчёт превысил локальный предел размера.',audioinput:'Микрофон',audiooutput:'Динамик',videoinput:'Камера',nameHidden:'Имя скрыто',noDevices:'Устройства не предоставлены.',busyAction:'Дождитесь завершения текущего действия.'
+    },
+    de: {
+      copying:"JSON-Bericht wird kopiert…",saving:"Wählen Sie den Speicherort des JSON-Berichts…",cancelled:"Speichern abgebrochen.",actionFailed:"Der Vorgang ist fehlgeschlagen.",
+      title:'Kamera mit WebView prüfen',intro:'Zeigt Kameradaten, die diese WebView einer Website tatsächlich bereitstellt. Das Video bleibt auf diesem PC.',choose:'Kamera auswählen',requested:'Auf dem Server ausgewählt (Windows-Hinweis, keine Web-API-Daten):',mapping:'WebView-Kamera-IDs sind undurchsichtig. Ordnen Sie die Kamera über ihren Namen zu; gleiche Namen erfordern eine ausdrückliche Auswahl.',camera:'In WebView verfügbare Kamera',select:'Kamera auswählen…',permissionNote:'Die Anwendung erlaubt Kamerazugriff nur für diesen lokalen Prüf-Ursprung. Bleiben Namen verborgen, prüfen Sie den Windows-Kameradatenschutz und aktualisieren Sie. Die Standardkamera wird nicht geöffnet.',start:'Prüfung starten',stop:'Kamera stoppen',refresh:'Geräte aktualisieren',copy:'JSON kopieren',save:'JSON speichern…',close:'Schließen',preview:'Lokale Vorschau',previewNote:'Die eingestellte Bildrate ist eine Kameraeinstellung, keine gemessene Übertragungsrate. Bilder und Ton werden nicht aufgezeichnet.',settings:'Tatsächliche Stream-Einstellungen',capabilities:'Stream-Funktionen',devices:'WebView-Geräteübersicht',audioNote:'Mikrofone werden nur aufgelistet. Dieses Werkzeug fordert keinen Mikrofonzugriff an und erfasst keinen Ton.',kind:'Typ',name:'Name',report:'Vollständiger Bericht',privacy:'Der Bericht enthält Gerätenamen und browserbezogene Kennungen. Kopieren oder speichern Sie ihn nur, wenn Sie diese Angaben teilen möchten.',limitationsTitle:'Was dieser Bericht identifizieren kann',limitations:'deviceId und groupId sind browserbezogen und keine USB-Seriennummern. Web-APIs stellen den Windows-PnP-Pfad und die Treiberversion nicht als eigene Felder bereit. Ein Name kann die Modellkennung VID:PID enthalten. Es gibt kein standardisiertes Web-API-Kennzeichen für physische oder virtuelle Kameras. Fehlende Funktionen wurden von der API nicht bereitgestellt; sie sind deshalb nicht zwingend vom Gerät ausgeschlossen.',permissionLimit:'Namen, IDs und Funktionen hängen von Kameraberechtigung, WebView2-Version, Treiber und Website-Ursprung ab. Die IDs hier gehören zum lokalen Ursprung/Profil und sind keine Telegram-IDs. Andere Anwendungen können andere Ergebnisse liefern. Dies ist eine lokale WebView2-Messung, keine Telegram-Emulation.',ready:'Wählen Sie eine Kamera und starten Sie die Prüfung.',matched:'Ein eindeutiger Namensabgleich wurde gefunden. Bestätigen Sie die Kamera und starten Sie die Prüfung.',ambiguous:'Mehrere Kameras passen zum Windows-Hinweis. Wählen Sie die gewünschte Kamera ausdrücklich.',unmatched:'Kein eindeutiger WebView-Abgleich. Wählen Sie die Kamera ausdrücklich; es wird keine andere Quelle eingesetzt.',needPermission:'Kameranamen sind verborgen. Prüfen Sie den Windows-Kameradatenschutz und aktualisieren Sie; die Standardkamera wird nicht geöffnet.',opening:'Gewählte Kamera wird geöffnet…',running:'Prüfung läuft. Nur die ausgewählte Kamera ist geöffnet.',stopped:'Kamera gestoppt. Der letzte Bericht bleibt erhalten.',refreshed:'Geräteliste aktualisiert.',copied:'JSON-Bericht kopiert.',copyFailed:'Kopieren ist nicht verfügbar. Markieren und kopieren Sie den JSON-Text unten.',saved:"JSON-Bericht gespeichert.",unsupported:'Kamera-APIs sind nicht verfügbar. Die Seite benötigt einen sicheren WebView2-Ursprung mit Kamerazugriff.',missing:'WebView stellt keine Kameras bereit.',hidden:'Kamera {n} (Name verborgen)',disconnected:'Die ausgewählte Kamera wurde getrennt. Keine andere Kamera wurde ausgewählt.',chooseNamed:'Wählen Sie vor der Prüfung eine benannte Kamera.',denied:'Kamerazugriff verweigert. Prüfen Sie den Windows-Kameradatenschutz und die WebView-Berechtigung.',busy:'Die Kamera konnte nicht geöffnet werden. Sie ist möglicherweise belegt, getrennt oder während USB-Freigabe lokal nicht verfügbar.',notFound:'Die gewählte Kamera ist nicht mehr verfügbar. Aktualisieren Sie die Liste.',constraint:'Die Kamera mit der gewählten ID konnte nicht geöffnet werden. Aktualisieren und erneut wählen.',error:'Kameraprüfung fehlgeschlagen',notConfigured:'Warten auf den Server…',reportTooLarge:'Der Bericht überschreitet die lokale Größenbegrenzung.',audioinput:'Mikrofon',audiooutput:'Lautsprecher',videoinput:'Kamera',nameHidden:'Name verborgen',noDevices:'Keine Geräte bereitgestellt.',busyAction:'Beenden Sie zuerst den aktuellen Vorgang.'
+    },
+    fr: {
+      copying:"Copie du rapport JSON…",saving:"Choisissez où enregistrer le rapport JSON…",cancelled:"Enregistrement annulé.",actionFailed:"L’opération a échoué.",
+      title:'Inspection de caméra via WebView',intro:'Affiche les données de caméra que cette WebView expose réellement à un site. La vidéo reste sur ce PC.',choose:'Sélection de la caméra',requested:'Sélectionnée sur le serveur (indication Windows, pas des données Web API) :',mapping:'Les identifiants WebView sont opaques. Faites correspondre le nom affiché ; des noms identiques exigent un choix explicite.',camera:'Caméra exposée par WebView',select:'Sélectionner une caméra…',permissionNote:'L’application autorise la caméra uniquement pour cette origine locale. Si les noms restent masqués, vérifiez la confidentialité caméra de Windows et actualisez. La caméra par défaut ne sera pas ouverte.',start:'Démarrer l’inspection',stop:'Arrêter la caméra',refresh:'Actualiser les appareils',copy:'Copier le JSON',save:'Enregistrer le JSON…',close:'Fermer',preview:'Aperçu local',previewNote:'La fréquence sélectionnée est un réglage de la caméra, pas une mesure des images reçues. Aucune image ni aucun son n’est enregistré.',settings:'Réglages réels du flux',capabilities:'Capacités du flux',devices:'Appareils exposés par WebView',audioNote:'Les microphones sont uniquement répertoriés. Cet outil ne demande jamais l’accès au microphone et ne capture aucun son.',kind:'Type',name:'Nom',report:'Rapport complet',privacy:'Le rapport contient les noms d’appareils et des identifiants propres au navigateur. Copiez-le ou enregistrez-le seulement si vous souhaitez partager ces informations.',limitationsTitle:'Ce que ce rapport permet d’identifier',limitations:'deviceId et groupId sont propres au navigateur, pas des numéros de série USB. Les API Web n’exposent pas le chemin Windows PnP ni la version du pilote dans des champs dédiés. Un nom peut contenir le VID:PID du modèle. Aucun indicateur Web API standard ne prouve qu’une caméra est physique ou virtuelle. Une capacité indisponible signifie que l’API ne l’expose pas, pas que l’appareil ne la possède pas.',permissionLimit:'Les noms, identifiants et capacités dépendent des autorisations, de WebView2, du pilote et de l’origine. Les identifiants ci-dessous appartiennent à cette origine et à ce profil locaux, pas à Telegram. Les autres applications peuvent donner un résultat différent. Cette mesure WebView2 n’est pas une émulation de Telegram.',ready:'Sélectionnez une caméra, puis démarrez l’inspection.',matched:'Un nom correspond de manière unique. Confirmez la caméra et démarrez l’inspection.',ambiguous:'Plusieurs caméras correspondent à l’indication Windows. Choisissez explicitement la bonne.',unmatched:'Aucune correspondance WebView unique. Choisissez la caméra explicitement ; aucune autre source ne sera substituée.',needPermission:'Les noms sont masqués. Vérifiez la confidentialité caméra de Windows et actualisez ; la caméra par défaut ne sera pas ouverte.',opening:'Ouverture de la caméra sélectionnée…',running:'Inspection en cours. Seule la caméra sélectionnée est ouverte.',stopped:'Caméra arrêtée. Le dernier rapport est conservé.',refreshed:'Liste des appareils actualisée.',copied:'Rapport JSON copié.',copyFailed:'Copie indisponible. Sélectionnez et copiez le texte JSON ci-dessous.',saved:"Rapport JSON enregistré.",unsupported:'Les API caméra sont indisponibles. La page nécessite une origine WebView2 sécurisée avec accès caméra.',missing:'WebView n’expose aucune caméra.',hidden:'Caméra {n} (nom masqué)',disconnected:'La caméra sélectionnée a été débranchée. Aucune autre caméra n’a été choisie.',chooseNamed:'Choisissez une caméra nommée avant l’inspection.',denied:'Accès caméra refusé. Vérifiez la confidentialité Windows et l’autorisation WebView.',busy:'Impossible d’ouvrir la caméra. Elle peut être occupée, débranchée ou indisponible localement pendant un partage USB.',notFound:'La caméra sélectionnée n’est plus disponible. Actualisez la liste.',constraint:'Impossible d’ouvrir cet identifiant de caméra. Actualisez et sélectionnez à nouveau.',error:'Échec de l’inspection caméra',notConfigured:'En attente du serveur…',reportTooLarge:'Le rapport dépasse la limite de taille locale.',audioinput:'Microphone',audiooutput:'Haut-parleur',videoinput:'Caméra',nameHidden:'Nom masqué',noDevices:'Aucun appareil exposé.',busyAction:'Terminez d’abord l’opération en cours.'
+    },
+    zh: {
+      copying:"正在复制 JSON 报告…",saving:"请选择 JSON 报告的保存位置…",cancelled:"已取消保存。",actionFailed:"操作失败。",
+      title:'WebView 摄像头检查',intro:'查看此 WebView 实际向网站提供的摄像头信息。视频仅保留在本机。',choose:'选择摄像头',requested:'服务器中所选设备（Windows 提示，不属于 Web API 数据）：',mapping:'WebView 摄像头 ID 是不透明的。请通过显示名称对应设备；重名设备必须手动选择。',camera:'WebView 提供的摄像头',select:'选择摄像头…',permissionNote:'应用仅允许本地检查来源访问摄像头。如果名称仍被隐藏，请检查 Windows 摄像头隐私并刷新。不会打开默认摄像头。',start:'开始检查',stop:'停止摄像头',refresh:'刷新设备',copy:'复制 JSON',save:'保存 JSON…',close:'关闭',preview:'本地预览',previewNote:'选定帧率是摄像头设置，不是实测接收帧率。不录制视频帧或声音。',settings:'实际视频轨道设置',capabilities:'视频轨道能力',devices:'WebView 设备列表',audioNote:'仅列出麦克风。本工具不请求麦克风权限，也不采集声音。',kind:'类型',name:'名称',report:'完整报告',privacy:'报告包含设备名称和浏览器范围内的标识符。仅在需要分享这些信息时复制或保存。',limitationsTitle:'报告可以及不可以识别的内容',limitations:'deviceId 和 groupId 属于浏览器范围，并非 USB 序列号。Web API 不以独立字段提供 Windows PnP 路径或驱动版本。名称可能包含型号 VID:PID。没有标准 Web API 标志可证明摄像头是物理设备还是虚拟设备。能力不可用意味着 API 未提供该信息，并不意味着设备不支持。',permissionLimit:'名称、ID 和能力取决于摄像头权限、WebView2 版本、驱动程序和网站来源。此处 ID 属于本地来源和配置文件，并非 Telegram ID。其他应用可能提供不同结果。这是本地 WebView2 测量，并非 Telegram 模拟。',ready:'请选择摄像头，然后开始检查。',matched:'找到唯一名称匹配。确认摄像头后开始检查。',ambiguous:'多个摄像头符合 Windows 提示。请明确选择目标摄像头。',unmatched:'未找到唯一 WebView 匹配。请明确选择摄像头；不会自动替换为其他来源。',needPermission:'摄像头名称被隐藏。请检查 Windows 摄像头隐私并刷新；不会打开默认摄像头。',opening:'正在打开所选摄像头…',running:'正在检查。仅打开所选摄像头。',stopped:'摄像头已停止。保留上一份报告。',refreshed:'设备列表已刷新。',copied:'JSON 报告已复制。',copyFailed:'无法复制。请选中并复制下面的 JSON 文本。',saved:"JSON 报告已保存。",unsupported:'摄像头 API 不可用。此页面必须运行在允许摄像头访问的安全 WebView2 来源中。',missing:'WebView 未提供摄像头。',hidden:'摄像头 {n}（名称隐藏）',disconnected:'所选摄像头已断开。未选择其他摄像头。',chooseNamed:'检查前请选择具名摄像头。',denied:'摄像头访问被拒绝。请检查 Windows 摄像头隐私和 WebView 权限。',busy:'无法打开摄像头。设备可能被占用、已断开，或通过 USB 共享时在本地不可用。',notFound:'所选摄像头已不可用。请刷新列表。',constraint:'无法打开选定 ID 对应的摄像头。请刷新并重新选择。',error:'摄像头检查失败',notConfigured:'正在等待服务器…',reportTooLarge:'报告超过本地大小限制。',audioinput:'麦克风',audiooutput:'扬声器',videoinput:'摄像头',nameHidden:'名称隐藏',noDevices:'未提供任何设备。',busyAction:'请先完成当前操作。'
+    }
+  };
+  Object.assign(strings["en"],{"website": "Website access check", "requestPermission": "Request camera permission", "comparison": "Website camera request", "beforePermission": "Before camera permission", "afterPermission": "After camera permission", "siteExplanation": "This separate local page starts without camera permission. Request access, allow or deny it in the dialog, then choose a camera and start inspection. No camera opens just to reveal device names. Results in Telegram or another origin may differ.", "deviceScope": "Only browser-visible media devices and devices already authorized for this origin are queried. A website cannot silently read the full Windows Device Manager inventory. USB/HID/serial/Bluetooth availability varies by WebView; no device chooser or microphone capture is requested.", "siteReady": "Before-permission data collected. Request camera permission to compare.", "permissionPending": "Waiting for your camera permission decision…", "permissionGranted": "Camera permission granted. Select a camera, then start inspection.", "permissionDenied": "Camera permission denied. The page can only show data available without camera access.", "unavailableApis": "Unavailable browser APIs", "reportLimited": "The browser result exceeds the local report limit. The preview is bounded; JSON copy/save is disabled to avoid exporting an incomplete report.", "siteOpening": "Opening the separate website access check…", "privacy": "This JSON contains browser API results only. Report headings organize the results; native Windows hints and application identifiers are excluded.", "permissionNote": "Camera permission is granted for this local diagnostic. For a before/after comparison, use Website access check. No default camera will be opened."});
+  Object.assign(strings["ru"],{"website": "Проверка доступа сайта", "requestPermission": "Запросить доступ к камере", "comparison": "Запрос камеры сайтом", "beforePermission": "До разрешения камеры", "afterPermission": "После разрешения камеры", "siteExplanation": "Эта отдельная локальная страница начинает без разрешения камеры. Запросите доступ, разрешите или запретите его в диалоге, затем выберите камеру и начните проверку. Для раскрытия имён камера не открывается. В Telegram или на другом сайте результаты могут отличаться.", "deviceScope": "Проверяются только доступные браузеру медиаустройства и устройства, уже разрешённые этому адресу сайта. Сайт не может незаметно прочитать весь диспетчер устройств Windows. Поддержка USB/HID/последовательных портов/Bluetooth зависит от WebView; выбор новых устройств и захват микрофона не запрашиваются.", "siteReady": "Собраны данные до разрешения. Запросите доступ к камере для сравнения.", "permissionPending": "Ожидание вашего решения о доступе к камере…", "permissionGranted": "Доступ к камере разрешён. Выберите камеру и начните проверку.", "permissionDenied": "Доступ к камере запрещён. Показаны только сведения, доступные без него.", "unavailableApis": "Недоступные браузерные API", "reportLimited": "Результат браузера превышает лимит отчёта. Просмотр ограничен; копирование и сохранение JSON отключены, чтобы не выдавать неполный отчёт за полный.", "siteOpening": "Открывается отдельная проверка доступа сайта…", "privacy": "В JSON включены только результаты браузерных API. Заголовки группируют результаты; подсказки Windows и идентификаторы нашего приложения исключены.", "permissionNote": "Для этой локальной диагностики доступ к камере разрешён. Сравнение до и после разрешения — кнопка «Проверка доступа сайта». Камера по умолчанию не открывается."});
+  Object.assign(strings["de"],{"website": "Website-Zugriff prüfen", "requestPermission": "Kamerazugriff anfordern", "comparison": "Kameraanfrage einer Website", "beforePermission": "Vor der Kameraberechtigung", "afterPermission": "Nach der Kameraberechtigung", "siteExplanation": "Diese separate lokale Seite startet ohne Kameraberechtigung. Fordern Sie Zugriff an, erlauben oder verweigern Sie ihn, wählen Sie danach eine Kamera und starten Sie die Prüfung. Zum Anzeigen der Namen wird keine Kamera geöffnet. Telegram und andere Ursprünge können andere Ergebnisse liefern.", "deviceScope": "Nur browserseitig sichtbare Mediengeräte und bereits für diesen Ursprung freigegebene Geräte werden abgefragt. Eine Website kann den Windows-Geräte-Manager nicht unbemerkt auslesen. USB/HID/Serial/Bluetooth hängen vom WebView ab; keine Geräteauswahl und keine Mikrofonaufnahme.", "siteReady": "Daten vor der Berechtigung erfasst. Fordern Sie Kamerazugriff zum Vergleich an.", "permissionPending": "Warten auf Ihre Entscheidung zum Kamerazugriff…", "permissionGranted": "Kamerazugriff erlaubt. Wählen Sie eine Kamera und starten Sie die Prüfung.", "permissionDenied": "Kamerazugriff verweigert. Es werden nur ohne Zugriff verfügbare Daten angezeigt.", "unavailableApis": "Nicht verfügbare Browser-APIs", "reportLimited": "Das Browserergebnis überschreitet die Berichtsgrenze. Die Vorschau ist begrenzt; JSON-Kopieren/Speichern ist deaktiviert, um keinen unvollständigen Bericht auszugeben.", "siteOpening": "Separate Website-Zugriffsprüfung wird geöffnet…", "privacy": "Dieses JSON enthält nur Browser-API-Ergebnisse. Überschriften gruppieren Ergebnisse; native Windows-Hinweise und Anwendungskennungen sind ausgeschlossen.", "permissionNote": "Für diese lokale Diagnose ist Kamerazugriff erlaubt. Verwenden Sie Website-Zugriff prüfen für einen Vorher/Nachher-Vergleich. Keine Standardkamera wird geöffnet."});
+  Object.assign(strings["fr"],{"website": "Vérifier l’accès du site", "requestPermission": "Demander l’accès caméra", "comparison": "Demande de caméra par un site", "beforePermission": "Avant l’autorisation caméra", "afterPermission": "Après l’autorisation caméra", "siteExplanation": "Cette page locale distincte démarre sans autorisation caméra. Demandez l’accès, autorisez-le ou refusez-le, puis choisissez une caméra et lancez l’inspection. Aucune caméra ne s’ouvre pour révéler les noms. Telegram et les autres origines peuvent donner des résultats différents.", "deviceScope": "Seuls les appareils multimédias visibles du navigateur et les appareils déjà autorisés pour cette origine sont interrogés. Un site ne peut pas lire discrètement tout le Gestionnaire de périphériques Windows. USB/HID/série/Bluetooth dépendent du WebView ; aucun sélecteur ni aucune capture microphone.", "siteReady": "Données avant autorisation collectées. Demandez l’accès caméra pour comparer.", "permissionPending": "En attente de votre décision d’accès caméra…", "permissionGranted": "Accès caméra autorisé. Choisissez une caméra et lancez l’inspection.", "permissionDenied": "Accès caméra refusé. Seules les données disponibles sans cet accès sont affichées.", "unavailableApis": "API navigateur indisponibles", "reportLimited": "Le résultat dépasse la limite locale du rapport. L’aperçu est limité ; copie/enregistrement JSON désactivés pour éviter un rapport incomplet.", "siteOpening": "Ouverture de la vérification distincte d’accès du site…", "privacy": "Ce JSON contient uniquement les résultats des API du navigateur. Les titres les regroupent ; les indications Windows et identifiants de notre application sont exclus.", "permissionNote": "L’accès caméra est autorisé pour ce diagnostic local. Utilisez Vérifier l’accès du site pour comparer avant/après autorisation. Aucune caméra par défaut ne sera ouverte."});
+  Object.assign(strings["zh"],{"website": "检查网站访问权限", "requestPermission": "请求摄像头权限", "comparison": "网站请求摄像头", "beforePermission": "授予摄像头权限前", "afterPermission": "摄像头权限决定后", "siteExplanation": "此独立本地页面从未授予摄像头权限的状态开始。请求访问，在对话框中允许或拒绝，然后选择摄像头并开始检查。不会为显示设备名称而打开摄像头。Telegram 或其他来源的结果可能不同。", "deviceScope": "仅查询浏览器可见的媒体设备以及已授权给此来源的设备。网站无法静默读取完整的 Windows 设备管理器。USB/HID/串口/蓝牙支持取决于 WebView；不请求选择新设备或录制麦克风。", "siteReady": "已收集授权前的数据。请求摄像头权限以进行比较。", "permissionPending": "正在等待您的摄像头权限决定…", "permissionGranted": "已允许摄像头访问。选择摄像头并开始检查。", "permissionDenied": "已拒绝摄像头访问。仅显示无需此权限即可获得的数据。", "unavailableApis": "不可用的浏览器 API", "reportLimited": "浏览器结果超出本地报告限制。预览已限制；为避免导出不完整报告，已禁用 JSON 复制和保存。", "siteOpening": "正在打开独立的网站访问检查…", "privacy": "此 JSON 仅包含浏览器 API 的结果。标题用于分组；不包含 Windows 原生提示和本应用标识符。", "permissionNote": "此本地诊断已获得摄像头权限。使用“检查网站访问权限”比较授权前后的信息。不会打开默认摄像头。"});
+  Object.assign(strings["en"],{"requested": "Selected in Windows (hint, not Web API data):", "notConfigured": "Waiting for the application…"});
+  Object.assign(strings["ru"],{"requested": "Выбрано в Windows (подсказка, не данные Web API):", "notConfigured": "Ожидание приложения…"});
+  Object.assign(strings["de"],{"requested": "In Windows ausgewählt (Hinweis, keine Web-API-Daten):", "notConfigured": "Warten auf die Anwendung…"});
+  Object.assign(strings["fr"],{"requested": "Sélection dans Windows (indication, pas une donnée Web API) :", "notConfigured": "En attente de l’application…"});
+  Object.assign(strings["zh"],{"requested": "在 Windows 中选择（提示，非 Web API 数据）：", "notConfigured": "正在等待应用…"});
+  const $ = id => document.getElementById(id);
+  strings.en.policyDenied="Windows policy blocks camera access (LetAppsAccessCamera=2). An administrator must return this policy to user control before capture can start. This is a Windows setting, separate from this page permission.";
+  strings.ru.policyDenied="Политика Windows запрещает доступ к камере (LetAppsAccessCamera=2). Для просмотра администратор должен вернуть эту политику под управление пользователя. Это настройка Windows, отдельная от разрешения страницы.";
+  strings.de.policyDenied="Die Windows-Richtlinie sperrt den Kamerazugriff (LetAppsAccessCamera=2). Ein Administrator muss die Richtlinie auf Benutzersteuerung zurücksetzen. Dies ist unabhängig von der Seitenberechtigung.";
+  strings.fr.policyDenied="La stratégie Windows bloque la caméra (LetAppsAccessCamera=2). Un administrateur doit rendre le contrôle à l’utilisateur. Ce réglage est distinct de l’autorisation de la page.";
+  strings.zh.policyDenied="Windows 策略禁止访问摄像头（LetAppsAccessCamera=2）。管理员需将策略恢复为用户控制。此 Windows 设置与页面权限不同。";
+  let cameraPolicyDenied=false;
+  const state = {configured:false,language:'en',requested:null,nativeCameras:[],siteCheck:false,client:false,stream:null,busy:false,epoch:0,devices:[],report:null,maxDevices:256,uniqueRequestedMatch:false,actionPending:null,limited:false,exportOK:false,unavailable:new Set()};
+  let deviceTimer = null;
+  const t = key => (strings[state.language] || strings.en)[key] || strings.en[key] || key;
+  const status = (key,error) => { $('status').textContent=t(key)+(key === 'denied' && cameraPolicyDenied ? ' '+t('policyDenied') : ''); $('status').classList.toggle('error',Boolean(error)); };
+  const post = value => { if (window.chrome && window.chrome.webview) window.chrome.webview.postMessage(value); };
+  const clean = value => value === undefined ? undefined : JSON.parse(JSON.stringify(value));
+  const bytes = text => new TextEncoder().encode(text).length;
+  const supported = () => Boolean(window.isSecureContext && navigator.mediaDevices && navigator.mediaDevices.enumerateDevices && navigator.mediaDevices.getUserMedia);
+  const cameraSelected = () => state.devices.find(d => d.kind === 'videoinput' && d.deviceId === $('camera').value);
+  function buttons() {
+    const ok=supported() && state.configured, pending=Boolean(state.actionPending), selected=cameraSelected();
+    $('start').disabled=!ok || state.busy || pending || Boolean(state.stream) || !selected || !selected.label || !selected.deviceId;
+    $('stop').disabled=!state.stream && !state.busy;
+    $('camera').disabled=!ok || state.busy || pending || Boolean(state.stream);
+    $('refresh').disabled=!ok || state.busy || pending;
+    $('website').disabled=!ok || state.busy || pending;
+    $('permission').disabled=!ok || state.busy || pending || Boolean(state.stream);
+    $('copy').disabled=!state.exportOK || pending;
+    $('save').disabled=!state.exportOK || pending;
+  }
+  function release() {
+    const stream=state.stream; state.stream=null;
+    if (stream) stream.getTracks().forEach(track => {track.onended=null;track.onmute=null;track.onunmute=null;track.stop();});
+    $('preview').pause(); $('preview').srcObject=null; $('previewBox').hidden=true;
+  }
+  function updateTrack() {
+    if (!state.stream || !state.report) return;
+    const track=state.stream.getVideoTracks()[0];
+    if (!track) return;
+    const camera={};
+    for (const key of ['id','kind','label','enabled','muted','readyState','contentHint']) if (key in track) camera[key]=track[key];
+    for (const [key,method] of [['settings','getSettings'],['capabilities','getCapabilities'],['constraints','getConstraints']]) {
+      const value=readAPI(track,method,'track.'+method);
+      if (value !== undefined) camera[key]=value;
+    }
+    state.report.camera=camera;
+  }
+  function stop(quiet) {
+    state.epoch++;
+    const camera=state.report && state.report.camera;
+    release(); state.busy=false;
+    if (camera) { camera.readyState='ended'; renderReport(); }
+    buttons(); if (!quiet) status('stopped');
+  }
+  const errorKey = err => ({NotAllowedError:'denied',PermissionDeniedError:'denied',NotFoundError:'notFound',DevicesNotFoundError:'notFound',OverconstrainedError:'constraint',ConstraintNotSatisfiedError:'constraint',NotReadableError:'busy',TrackStartError:'busy',AbortError:'busy'})[err && err.name] || 'error';
+  const safeFailure = err => {
+    const value={name:String(err && err.name || 'Error').slice(0,120),message:String(err && err.message || '').slice(0,1200)};
+    if (err && typeof err.constraint === 'string') value.constraint=err.constraint.slice(0,1200);
+    return value;
+  };
+  function readAPI(target,method,name) {
+    if (!target || typeof target[method] !== 'function') {state.unavailable.add(name); return undefined;}
+    try {
+      const value=clean(target[method]());
+      if (value !== undefined && bytes(JSON.stringify(value)) > 65536) {state.limited=true; return undefined;}
+      return value;
+    } catch (err) { state.report.errors[name]=safeFailure(err); return undefined; }
+  }
+  async function permissions() {
+    const result={};
+    for (const name of ['camera','microphone']) {
+      if (!navigator.permissions || !navigator.permissions.query) {state.unavailable.add('permissions.'+name); continue;}
+      try {result[name]=(await navigator.permissions.query({name})).state;}
+      catch (_) {state.unavailable.add('permissions.'+name);}
+    }
+    return result;
+  }
+  function deviceData(devices) {
+    if (devices.length > state.maxDevices) state.limited=true;
+    return devices.slice(0,state.maxDevices).map(d => {
+      const value={};
+      for (const key of ['kind','label','deviceId','groupId']) {
+        const text=String(d[key] || '');
+        if (text.length > 4096) state.limited=true;
+        value[key]=text.slice(0,4096);
+      }
+      if (typeof d.getCapabilities === 'function') {
+        const capabilities=readAPI(d,'getCapabilities','InputDeviceInfo.getCapabilities');
+        if (capabilities !== undefined) value.capabilities=capabilities;
+      }
+      return value;
+    });
+  }
+  async function authorizedDevices() {
+    const result={};
+    const specs=[['usb','getDevices',['usbVersionMajor','usbVersionMinor','usbVersionSubminor','deviceClass','deviceSubclass','deviceProtocol','vendorId','productId','deviceVersionMajor','deviceVersionMinor','deviceVersionSubminor','manufacturerName','productName','serialNumber','opened']],['hid','getDevices',['vendorId','productId','productName','opened','collections']],['serial','getPorts',['connected']],['bluetooth','getDevices',['id','name']]];
+    for (const [api,method,keys] of specs) {
+      const target=navigator[api];
+      if (!target || typeof target[method] !== 'function') {state.unavailable.add(api+'.'+method); continue;}
+      try {
+        const devices=await target[method]();
+        if (devices.length > 64) state.limited=true;
+        result[api]=devices.slice(0,64).map(device => {
+          const entry={};
+          for (const key of keys) if (key in device) {
+            const value=clean(device[key]);
+            if (value !== undefined && bytes(JSON.stringify(value)) <= 65536) entry[key]=value;
+            else state.limited=true;
+          }
+          if (api === 'serial' && typeof device.getInfo === 'function') entry.info=clean(device.getInfo());
+          if (api === 'bluetooth' && device.gatt) entry.gatt={connected:device.gatt.connected};
+          return entry;
+        });
+      } catch (err) {state.report.errors[api+'.'+method]=safeFailure(err);}
+    }
+    return result;
+  }
+  function newReport() {
+    const browser={};
+    for (const key of ['userAgent','language','languages','platform','cookieEnabled','hardwareConcurrency','deviceMemory','maxTouchPoints']) if (key in navigator) browser[key]=clean(navigator[key]);
+    browser.origin=location.origin;
+    browser.secureContext=window.isSecureContext;
+    return {browser,permissions:{},devices:[],authorizedDevices:{},errors:{}};
+  }
+  function renderReport() {
+    if (!state.report) return;
+    const json=JSON.stringify(state.report,null,2);
+    state.exportOK=!state.limited && bytes(json) <= 262144;
+    // Never quietly export a reduced inventory as a complete browser result.
+    $('json').value=bytes(json) <= 262144 ? json : '';
+    $('reportWarning').hidden=state.exportOK;
+    $('reportWarning').textContent=state.exportOK ? '' : t('reportLimited');
+    const camera=state.report.camera;
+    $('settings').textContent=camera ? JSON.stringify(camera,null,2) : '—';
+    $('capabilities').textContent=camera && camera.capabilities ? JSON.stringify(camera.capabilities,null,2) : '—';
+    $('settings').classList.toggle('empty',!camera); $('capabilities').classList.toggle('empty',!camera);
+    $('deviceAccess').textContent=JSON.stringify(state.report.authorizedDevices,null,2)+(state.unavailable.size ? '\n'+t('unavailableApis')+': '+Array.from(state.unavailable).join(', ') : '');
+    $('beforePermission').textContent=state.report.beforePermission ? JSON.stringify(state.report.beforePermission,null,2) : '—';
+    $('afterPermission').textContent=state.report.afterPermission ? JSON.stringify(state.report.afterPermission,null,2) : '—';
+    buttons();
+    if (state.exportOK) post({type:'report',report:clean(state.report)});
+  }
+  function renderDevices() {
+    const body=$('devices'); body.replaceChildren();
+    if (!state.devices.length) {
+      const row=document.createElement('tr'),cell=document.createElement('td');
+      cell.colSpan=4;cell.textContent=t('noDevices');row.appendChild(cell);body.appendChild(row);return;
+    }
+    state.devices.forEach(d => {
+      const row=document.createElement('tr');
+      [t(d.kind),d.label || t('nameHidden'),d.deviceId || '—',d.groupId || '—'].forEach(value => {
+        const cell=document.createElement('td');cell.textContent=value;row.appendChild(cell);
+      });body.appendChild(row);
+    });
+  }
+  const normalized = name => String(name || '').replace(/\s*\([0-9a-f]{4}:[0-9a-f]{4}\)\s*$/i,'').trim().toLocaleLowerCase();
+  const hex4 = value => typeof value === 'number' && Number.isInteger(value) && value >= 0 && value <= 65535 ? value.toString(16).padStart(4,'0') : /^[0-9a-f]{1,4}$/i.test(String(value || '')) ? String(value).toLowerCase().padStart(4,'0') : null;
+  function matchesNative(camera,nativeCamera) {
+    if (!camera.label || !nativeCamera.name || normalized(camera.label) !== normalized(nativeCamera.name)) return false;
+    const suffix=camera.label.match(/\(([0-9a-f]{4}):([0-9a-f]{4})\)\s*$/i),vid=hex4(nativeCamera.vendor),pid=hex4(nativeCamera.product);
+    return !suffix || !vid || !pid || (suffix[1].toLowerCase() === vid && suffix[2].toLowerCase() === pid);
+  }
+  const eligible = camera => camera.kind === 'videoinput' && (state.siteCheck || state.client || state.nativeCameras.some(nativeCamera => matchesNative(camera,nativeCamera)));
+  async function enumerate(initial) {
+    const epoch=state.epoch;
+    const raw=await navigator.mediaDevices.enumerateDevices();
+    if (epoch !== state.epoch) return;
+    const oldId=$('camera').value;
+    state.devices=deviceData(raw);
+    const cameras=state.devices.filter(eligible),allCameras=state.devices.filter(d => d.kind === 'videoinput');
+    const matches=state.requested ? cameras.filter(camera => matchesNative(camera,state.requested)) : [];
+    state.uniqueRequestedMatch=matches.length === 1 && Boolean(matches[0].deviceId);
+    $('camera').replaceChildren();
+    const placeholder=document.createElement('option');placeholder.value='';placeholder.textContent=t('select');$('camera').appendChild(placeholder);
+    cameras.forEach((camera,index) => {
+      const option=document.createElement('option');option.value=camera.deviceId;option.textContent=camera.label || t('hidden').replace('{n}',String(index+1));
+      if (camera.label && cameras.filter(other => other.label === camera.label).length > 1) option.textContent+=' — '+camera.deviceId.slice(-12);
+      option.disabled=!camera.deviceId || !camera.label;$('camera').appendChild(option);
+    });
+    if (cameras.some(camera => camera.deviceId && camera.deviceId === oldId)) $('camera').value=oldId;
+    else if (initial && matches.length === 1 && matches[0].deviceId) {$('camera').value=matches[0].deviceId;status('matched');}
+    else if (initial) status(allCameras.length && allCameras.every(camera => !camera.label) ? 'needPermission' : matches.length > 1 ? 'ambiguous' : state.requested ? 'unmatched' : !cameras.length ? 'missing' : 'ready');
+    const permission=await permissions(),authorized=await authorizedDevices();
+    if (epoch !== state.epoch) return;
+    state.report.devices=clean(state.devices);state.report.permissions=permission;state.report.authorizedDevices=authorized;
+    if (state.siteCheck && !state.report.beforePermission) state.report.beforePermission={permissions:clean(permission),devices:clean(state.devices),authorizedDevices:clean(authorized)};
+    renderDevices();renderReport();buttons();
+  }
+  async function start() {
+    const selected=cameraSelected();
+    if (state.busy || state.stream || state.actionPending || !selected || !selected.label || !selected.deviceId || !eligible(selected)) {status('chooseNamed',true);return;}
+    const epoch=++state.epoch; let acquired=null;
+    state.busy=true;status('opening');buttons();
+    try {
+      acquired=await navigator.mediaDevices.getUserMedia({video:{deviceId:{exact:selected.deviceId}},audio:false});
+      if (epoch !== state.epoch) {acquired.getTracks().forEach(track => track.stop());return;}
+      const track=acquired.getVideoTracks()[0];
+      if (!track) throw new DOMException('No video track was returned','NotFoundError');
+      const settings=typeof track.getSettings === 'function' ? track.getSettings() : {};
+      if (settings.deviceId && settings.deviceId !== selected.deviceId) throw new DOMException('The camera did not honor the exact requested identity','OverconstrainedError');
+      state.stream=acquired;acquired=null;updateTrack();delete state.report.errors.getUserMedia;
+      track.onended=() => {if (epoch === state.epoch) {stop(true);status('disconnected',true);}};
+      track.onmute=track.onunmute=() => {if (epoch === state.epoch) {updateTrack();renderReport();}};
+      $('preview').srcObject=state.stream;$('previewBox').hidden=false;
+      try {await $('preview').play();} catch (_) {}
+      if (epoch !== state.epoch) return;
+      await enumerate(false);
+      if (epoch !== state.epoch) return;
+      updateTrack();renderReport();status('running');
+    } catch (err) {
+      if (acquired) acquired.getTracks().forEach(track => track.stop());
+      if (epoch === state.epoch) {release();state.report.errors.getUserMedia=safeFailure(err);if (state.report.camera) state.report.camera.readyState='ended';renderReport();status(errorKey(err),true);}
+    } finally {if (epoch === state.epoch) {state.busy=false;buttons();}}
+  }
+  async function refresh() {
+    if (state.busy || state.actionPending) return;
+    state.busy=true;buttons();
+    try {await enumerate(!state.stream);if (state.stream) status('refreshed');} catch (err) {status(errorKey(err),true);}
+    finally {state.busy=false;buttons();}
+  }
+  async function copy() {
+    if (!state.exportOK || state.actionPending) return;
+    if (window.chrome && window.chrome.webview) {state.actionPending='copy';status('copying');buttons();post({type:'copy',report:clean(state.report)});return;}
+    try {await navigator.clipboard.writeText($('json').value);status('copied');}
+    catch (_) {$('json').focus();$('json').select();status('copyFailed',true);}
+  }
+  function configure(options) {
+    if (state.configured) return;
+    options=options && typeof options === 'object' ? options : {};
+    const language=String(options.language || 'en').toLowerCase();
+    state.language=language.startsWith('zh') ? 'zh' : Object.hasOwn(strings,language) ? language : 'en';
+    document.documentElement.lang=state.language === 'zh' ? 'zh-CN' : state.language;
+    document.querySelectorAll('[data-i18n]').forEach(element => {element.textContent=t(element.dataset.i18n);});
+    document.title=t('title');$('json').setAttribute('aria-label',t('report'));
+    cameraPolicyDenied=options.cameraPolicyDenied === true;
+    state.siteCheck=options.siteCheck === true;state.client=options.role === 'client';
+    $('permissionNote').textContent=state.siteCheck ? t('siteExplanation') : t('permissionNote');
+    if (cameraPolicyDenied) $('permissionNote').textContent+=' '+t('policyDenied');
+    state.requested=options.requested && typeof options.requested === 'object' ? clean(options.requested) : null;
+    state.nativeCameras=Array.isArray(options.cameras) ? clean(options.cameras.slice(0,state.maxDevices)) : [];
+    $('requestedName').textContent=state.requested && state.requested.name || '—';
+    $('nativeHint').hidden=state.siteCheck;$('website').hidden=state.siteCheck;$('permission').hidden=!state.siteCheck;$('comparison').hidden=!state.siteCheck;
+    $('save').hidden=!(options.features && options.features.save);state.configured=true;state.report=newReport();
+    if (!supported()) {$('unsupported').textContent=t('unsupported');$('unsupported').hidden=false;status('unsupported',true);renderReport();return;}
+    const constraints=readAPI(navigator.mediaDevices,'getSupportedConstraints','mediaDevices.getSupportedConstraints');
+    if (constraints !== undefined) state.report.supportedConstraints=constraints;
+    state.busy=true;buttons();
+    enumerate(true).then(async () => {
+      state.busy=false;buttons();
+      if (state.siteCheck) status('siteReady');
+      else if (options.autoStart === true && state.uniqueRequestedMatch) await start();
+    }).catch(err => {state.busy=false;state.report.errors.enumerateDevices=safeFailure(err);renderReport();status(errorKey(err),true);buttons();});
+  }
+  function onAction(id,name,handler,eventName) {
+    $(id).addEventListener(eventName || 'click',event => {post({type:'event',name});return handler(event);});
+  }
+  onAction('start','start',start);onAction('stop','stop',() => stop(false));onAction('refresh','refresh',refresh);onAction('copy','copy',copy);
+  onAction('camera','camera-selection',() => buttons(),'change');
+  onAction('website','website-check',() => {if (!state.busy && !state.actionPending) {status('siteOpening');post({type:'website-check'});}});
+  onAction('permission','request-permission',() => {
+    if (!state.siteCheck || state.busy || state.stream || state.actionPending) return;
+    state.actionPending='permission';status('permissionPending');buttons();post({type:'request-permission'});
+  });
+  onAction('save','save',() => {if (state.exportOK && !state.actionPending) {state.actionPending='save';status('saving');buttons();post({type:'save',report:clean(state.report)});}});
+  onAction('close','close',() => {stop(true);post({type:'close'});});
+  window.addEventListener('pagehide',() => {if (deviceTimer) clearTimeout(deviceTimer);stop(true);});
+  window.addEventListener('beforeunload',() => release());
+  if (window.chrome && window.chrome.webview && typeof window.chrome.webview.addEventListener === 'function') window.chrome.webview.addEventListener('message',async event => {
+    const message=event.data;
+    if (!message || typeof message !== 'object') return;
+    if (message.type === 'permission-result' && state.actionPending === 'permission' && ['granted','denied','error'].includes(message.status)) {
+      state.actionPending=null;
+      try {
+        await refresh();
+        state.report.afterPermission={permissions:clean(state.report.permissions),devices:clean(state.devices),authorizedDevices:clean(state.report.authorizedDevices)};
+        renderReport();status(message.status === 'granted' ? 'permissionGranted' : message.status === 'denied' ? 'permissionDenied' : 'actionFailed',message.status === 'error');
+      } catch (err) {status(errorKey(err),true);}
+      return;
+    }
+    if (message.type !== 'action-result' || message.action !== state.actionPending || !['copy','save'].includes(message.action) || !['success','cancelled','error'].includes(message.status)) return;
+    state.actionPending=null;
+    if (message.status === 'success') status(message.action === 'copy' ? 'copied' : 'saved');
+    else if (message.status === 'cancelled') status('cancelled');
+    else {status(message.action === 'copy' ? 'copyFailed' : 'actionFailed',true);if (typeof message.error === 'string') $('status').textContent+=' '+message.error.slice(0,600);}
+    buttons();
+  });
+  if (navigator.mediaDevices && navigator.mediaDevices.addEventListener) navigator.mediaDevices.addEventListener('devicechange',() => {
+    if (deviceTimer) clearTimeout(deviceTimer);
+    deviceTimer=setTimeout(() => {deviceTimer=null;if (!state.busy && !state.actionPending && state.configured) enumerate(false).catch(() => {});},300);
+  });
+  Object.defineProperty(window,'bridgeCameraProbe',{value:Object.freeze({configure,start,stop:() => stop(true),snapshot:() => clean(state.report)}),writable:false,configurable:false});
+  status('notConfigured');buttons();post({type:'ready'});
+}());
+
+</script>
+</body>
+</html>

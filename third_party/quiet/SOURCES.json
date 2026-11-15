@@ -1,0 +1,39 @@
+{
+  "quiet": {
+    "repository": "https://github.com/quiet/quiet",
+    "commit": "b64a058ed40a49a8ff777bfb526f2989480eb1ec",
+    "archive_sha256": "2A7B0D279044FDF02FDBCCEFC2E1D3509B317FF9BA508952CEE461AB58FF42F4",
+    "license": "BSD-3-Clause",
+    "license_file": "quiet/LICENSE"
+  },
+  "liquid-dsp": {
+    "repository": "https://github.com/quiet/liquid-dsp",
+    "branch": "devel",
+    "commit": "4951bbbf67a9857dbaab0bc6fa69801717308109",
+    "archive_sha256": "D2A0B8BB2BBE7A5552435E140204CD47293966BD6CBE76ECF16084DF2F286E79",
+    "license": "MIT",
+    "license_file": "liquid-dsp/LICENSE"
+  },
+  "libfec": {
+    "repository": "https://github.com/quiet/libfec",
+    "commit": "9750ca0a6d0a786b506e44692776b541f90daa91",
+    "archive_sha256": "B540A52D6F0028D618FECAF1E4BFBC41E5E22FA7921AE08DF2C42081A3DE10DE",
+    "license": "LGPL-2.1",
+    "license_file": "libfec/lesser.txt",
+    "copyright_file": "libfec/README"
+  },
+  "jansson": {
+    "repository": "https://github.com/akheron/jansson",
+    "tag": "v2.14",
+    "commit": "684e18c927e89615c2d501737e90018f4930d6c5",
+    "archive_sha256": "3C4FCE59BD814A9E63B4A98B4D4D031D4689A994AFB87CBE9E5A22C7FF846C7C",
+    "license": "MIT",
+    "license_file": "jansson/LICENSE"
+  },
+  "build_toolchain": {
+    "repository": "https://github.com/mstorsjo/llvm-mingw",
+    "release": "20250114",
+    "asset": "llvm-mingw-20250114-ucrt-x86_64.zip",
+    "archive_sha256": "9395D95C089611E6CD728C9A07219FFC5AC706E0C719833A2F7E64A706A81541"
+  }
+}

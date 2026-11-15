@@ -1,0 +1,37 @@
+{
+  "schema": 1,
+  "package": "Microsoft.Web.WebView2",
+  "version": "1.0.3537.50",
+  "architecture": "x64",
+  "license": "BSD-3-Clause",
+  "url": "https://api.nuget.org/v3-flatcontainer/microsoft.web.webview2/1.0.3537.50/microsoft.web.webview2.1.0.3537.50.nupkg",
+  "sha256": "5EA526BBD728ADDA0DA4D31219267E96460494A427E4894C4E09D9F320F4B9AA",
+  "cache_directory": "tools/webview2-sdk/1.0.3537.50",
+  "files": [
+    {
+      "source": "build/native/include/WebView2.h",
+      "file": "include/WebView2.h",
+      "sha256": "387A0524C1A4498DB32756A6D3B1F4D43A90AC80CB921527F15D3DBF4A857459"
+    },
+    {
+      "source": "build/native/include/WebView2EnvironmentOptions.h",
+      "file": "include/WebView2EnvironmentOptions.h",
+      "sha256": "ABF86F89F86D2E46F646B398DCDAA0B45B0F30115CEFA0C4C4A6A810833850A9"
+    },
+    {
+      "source": "build/native/x64/WebView2LoaderStatic.lib",
+      "file": "x64/WebView2LoaderStatic.lib",
+      "sha256": "F125BA4C3B0FD7369E87FC16E96733897BC10DF54300586C00DF29AEAABE3A38"
+    },
+    {
+      "source": "LICENSE.txt",
+      "file": "LICENSE.txt",
+      "sha256": "0AF8F1B807512AAE39C2AC1AA4D0CAE65CABECB6FD554B8439A5162A0D6ECA55"
+    },
+    {
+      "source": "NOTICE.txt",
+      "file": "NOTICE.txt",
+      "sha256": "106423785C5B7EBA0A8E61D1837F2132E9C828E20AD530F565D981C1DF60DD90"
+    }
+  ]
+}

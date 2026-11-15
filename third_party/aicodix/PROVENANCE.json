@@ -1,0 +1,16 @@
+{
+  "retrieved_utc_date": "2026-11-13",
+  "license": "0BSD",
+  "sources": [
+    { "project": "modem", "repository": "https://github.com/aicodix/modem", "branch": "next", "commit": "6f0ff063a94b28487822c57ba921aebe82abf7ac" },
+    { "project": "dsp", "repository": "https://github.com/aicodix/dsp", "commit": "f268a558e801cbe10a986a17d7d09985673e159d" },
+    { "project": "code", "repository": "https://github.com/aicodix/code", "commit": "adb760f338f39d7a2d29628b2edca331f887c5e3" }
+  ],
+  "local_changes": [
+    { "path": "dsp/kahan.hh", "change": "Accept MSVC in compiler annotation selection; Build-Aicodix.ps1 supplies /fp:precise." }
+  ],
+  "build": "powershell.exe -NoProfile -ExecutionPolicy Bypass -File scripts\\Build-Aicodix.ps1",
+  "target": "windows-x86_64",
+  "runtime": "MSVC static CRT (/MT)",
+  "sample_rate": 48000
+}

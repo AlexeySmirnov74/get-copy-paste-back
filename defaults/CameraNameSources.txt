@@ -1,0 +1,69 @@
+Camera friendly-name suggestions
+Verified against primary vendor catalogs/support on 2026-11-13.
+
+The 100 entries in src/CameraNames.cs are readable product-name suggestions.
+Brand prefixes, capitalization and short descriptive suffixes are normalized
+for consistent display. The list includes current and earlier product models;
+it is not a sales, market-share, popularity, or compatibility ranking.
+These suggestions change the configured friendly label only. They do not copy
+a product's USB vendor/product IDs, serial number, firmware or descriptors.
+
+Logitech (20): C270, C310, C505, C505e, C920, C920s, C920e, C922,
+C925e, C930e, Brio 4K, Brio 100/105/300/305/500/505, MX Brio,
+MX Brio 705 for Business, StreamCam.
+https://www.logitech.com/en-us/shop/c/webcams
+https://hub.sync.logitech.com/work-desk-support
+https://secure.logitech.com/content/dam/logitech/en/video-collaboration/pdf/webcams-portfolio.pdf
+https://www.logitech.com/content/dam/logitech/vc/en/pdf/webcams-portfolio.pdf
+https://www.logitech.com/en-gb/shop/p/c310-hd-webcam
+https://www.logitech.com/id-id/shop/p/c505-hd-webcam
+
+Razer (7): Kiyo, Kiyo X, Kiyo Pro, Kiyo Pro Ultra, Kiyo V2,
+Kiyo V2 X, Kiyo V2 Pro.
+https://www.razer.com/sg-en/shop/streaming/streaming-cameras
+https://mysupport.razer.com/app/answers/detail/a_id/6120/kw/kiyo
+https://mysupport.razer.com/app/answers/detail/a_id/6204/kw/kiyo%20pro%20ultra
+
+Elgato (5): Facecam, Facecam Pro, Facecam Neo, Facecam MK.2, Facecam 4K.
+https://help.elgato.com/hc/en-us/articles/10342848394765-Elgato-Facecam-Products-Comparison-Chart
+
+Anker (4): PowerConf C200/C300/C302, AnkerWork C310 Webcam.
+https://www.ankerjapan.com/collections/web-camera
+
+Insta360 (5): Link, Link 2, Link 2C, Link 2 Pro, Link 2C Pro.
+https://www.insta360.com/product/insta360-link
+https://www.insta360.com/blog/news/insta360-link-2-vs-link-2-pro.html
+
+OBSBOT (11): Tiny, Tiny 4K, Tiny 2, Tiny 2 Lite, Tiny SE, Tiny 3,
+Tiny 3 Lite, Meet 2, Meet SE, Meet Flip, Meet SE 2.
+https://www.obsbot.com/store
+
+AVerMedia (6): PW515, Live Streamer CAM 513/PW513,
+Live Streamer CAM 313/PW313, PW315, PW313D DUALCAM, PW310P.
+https://www.avermedia.com/products/webcams
+https://www.avermedia.com/event/webcams/
+
+Creative (8): Live! Cam Sync HD, Chat HD, Connect HD, Connect HD 1080,
+Sync 1080p, Sync 1080p V2, Sync V3, Sync 4K.
+https://support.creative.com/kb/ShowArticle.aspx?sid=113932
+
+Trust (10): Trino, Exis, Tolar, Teza, Tyro, Taxon, GXT 1160 Vero,
+SpotLight, eLight, Primo.
+https://support.trust.com/en/support/solutions/folders/9000200389
+
+Dell (3): UltraSharp Webcam WB7022, Pro Webcam WB5023, Webcam WB3023.
+https://www.dell.com/en-uk/shop/web-cameras/ar/8332
+https://www.dell.com/support/kbdoc/en-ai/000377090/dell-camera-connected-to-a-usb-2-0-port-cannot-record-video-using-dell-display-and-peripheral-manager?lang=en
+
+HP (8): 320/325/430/435/620/625 FHD Webcam, 960/965 4K Streaming Webcam.
+https://kaas.hpcloud.hp.com/pdf-public/pdf_8545851_en-US-1.pdf
+https://www.hp.com/co-es/monitors-accessories/computer-accessories.html
+
+Lenovo (7): 300 FHD, 310 FHD, 500 FHD, 510 FHD, 4K Pro,
+Essential FHD, Performance FHD Webcam.
+https://support.lenovo.com/ie/en/sitemap
+https://techtoday.lenovo.com/sites/default/files/2024-09/Lenovo-Audio-and-Video-Brochure.pdf
+
+NexiGo (6): N60, N660P, N930AF, N950P, N960E, N680P.
+https://www.nexigo.com/collections/webcams
+https://www.nexigo.com/pages/nexigo-manuals

@@ -1,0 +1,37 @@
+Bundled virtual USB controller installer
+
+File: USBip-0.9.8.1-x64.exe
+Version: USBIP-WIN2 0.9.8.1, x64
+Bytes: 26083632
+SHA-256: 38CAD6D4432B52D5BB9409D9AD03B72FDFFC4ADA4CD3A48FBECA1A2752A8518A
+Original signed publisher: Cloudyne Systems (Scheibling Consulting AB)
+Publisher certificate SHA-1 thumbprint: 9AC56B6C76141395D74FFF6652818376E80B9C95
+Provenance: retained unchanged from the USBBridge production installer bundle.
+Original release: https://github.com/vadimgrn/usbip-win2/releases/tag/v.0.9.8.1
+Original installer URL: https://github.com/vadimgrn/usbip-win2/releases/download/v.0.9.8.1/USBip-0.9.8.1-x64.exe
+Corresponding source: https://github.com/vadimgrn/usbip-win2/archive/refs/tags/v.0.9.8.1.zip
+License: BSD-2-Clause; see ../licenses/drivers/usbip-win2/LICENSE.txt.
+The original installer includes Microsoft's x64 Visual C++ Redistributable.
+
+driver-installers.json is an unchanged copy of USBBridge's production manifest.
+Only its Client package is bundled here. Its Server MSI is not required by the
+local emulated camera and is not bundled with HorizonServer.
+
+DriverInstaller.cs adapts USBBridge's strict offline C# Authenticode verifier.
+It requires the complete pinned installer digest and the expected publisher.
+Certificate/revocation URL
+retrieval is disabled. After the digest matches it can cache the exact public
+GlobalSign GCC R45 EV CodeSigning CA 2020 intermediate in CurrentUser/CA only;
+its SHA-256 is CD0E144DD10BAC221FE2FB901058D16450A0578B3C47C770908F2E9ADA28EF12.
+Windows must already trust the upstream root. No root/trusted-publisher
+certificates are installed, and driver signatures/Secure Boot are not bypassed.
+
+Automatic setup first probes usbbridge-camera.exe driver-ready. If ready=true,
+no driver installation or certificate verification/store operation is performed.
+When missing, the already-elevated setup helper verifies and silently launches
+the original installer with the same components as USBBridge production setup:
+/VERYSILENT /SUPPRESSMSGBOXES /NORESTART /RESTARTEXITCODE=3010 /SP- /NOICONS
+/TYPE=custom /COMPONENTS=main,client /TASKS=vcredist
+/DIR="[ProgramFiles]\USBip" /LOG="[runtime root]\data\driver-install.log"
+Exit 3010 requests a manual Windows restart; the application never restarts it.
+An installer timeout is reported without terminating its driver-store update.

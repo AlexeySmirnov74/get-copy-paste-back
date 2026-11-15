@@ -1,0 +1,154 @@
+{
+  "names": [
+    "Anker AnkerWork C310",
+    "Anker PowerConf C200",
+    "Anker PowerConf C300",
+    "Anker PowerConf C302",
+    "ASUS ROG Eye",
+    "ASUS ROG Eye S",
+    "ASUS Webcam C3",
+    "ASUS Webcam C3 Gen 2",
+    "AVerMedia PW310P",
+    "AVerMedia PW313",
+    "AVerMedia PW313D",
+    "AVerMedia PW315",
+    "AVerMedia PW513",
+    "AVerMedia PW515",
+    "Creative Live! Cam Sync 1080p",
+    "Creative Live! Cam Sync 1080p V2",
+    "Creative Live! Cam Sync 4K",
+    "Creative Live! Cam Sync V3",
+    "Dell WB3023",
+    "Dell WB5023",
+    "Dell WB7022",
+    "EMEET C950",
+    "EMEET C950 4K",
+    "EMEET C955",
+    "EMEET C960",
+    "EMEET C960 2K",
+    "EMEET C960 4K",
+    "EMEET C960 AF",
+    "EMEET C965",
+    "EMEET C970",
+    "EMEET C970L",
+    "EMEET C980 Pro",
+    "EMEET C980 Pro 4K",
+    "EMEET C990",
+    "EMEET Jupiter",
+    "EMEET Nova",
+    "EMEET Nova 4K",
+    "EMEET S600",
+    "EMEET S800",
+    "HP 320 FHD",
+    "HP 325 FHD",
+    "HP 430 FHD",
+    "HP 435 FHD",
+    "HP 620 FHD",
+    "HP 625 FHD",
+    "JLab Epic USB Webcam",
+    "JLab GO USB Webcam",
+    "JLab JBuds USB Webcam",
+    "Lenovo 300 FHD",
+    "Lenovo 500 FHD",
+    "Lenovo 510 FHD",
+    "Lenovo Essential FHD",
+    "Lenovo Performance FHD",
+    "Lenovo Select FHD",
+    "Lenovo ThinkVision MC50",
+    "Logitech Brio 100",
+    "Logitech Brio 300",
+    "Logitech Brio 305",
+    "Logitech Brio 500",
+    "Logitech Brio 505",
+    "Logitech C270",
+    "Logitech C310",
+    "Logitech C505",
+    "Logitech C505e",
+    "Logitech C615",
+    "Logitech C920",
+    "Logitech C920e",
+    "Logitech C920s",
+    "Logitech C922",
+    "Logitech C925e",
+    "Logitech C930e",
+    "Logitech StreamCam",
+    "NexiGo N1000",
+    "NexiGo N60",
+    "NexiGo N60 Pro",
+    "NexiGo N660",
+    "NexiGo N660P",
+    "NexiGo N660P Pro",
+    "NexiGo N680",
+    "NexiGo N680E",
+    "NexiGo N680E Pro",
+    "NexiGo N680P",
+    "NexiGo N70",
+    "NexiGo N930AF",
+    "NexiGo N930E",
+    "NexiGo N930E Pro",
+    "NexiGo N930W",
+    "NexiGo N930W Lite",
+    "NexiGo N930W Pro",
+    "NexiGo N930W Ultra",
+    "NexiGo N940P",
+    "NexiGo N950P",
+    "NexiGo N960E",
+    "NexiGo N960E Plus",
+    "NexiGo N970P",
+    "NexiGo N980P",
+    "NexiGo N990",
+    "Razer Kiyo",
+    "Razer Kiyo Pro",
+    "Razer Kiyo X"
+  ],
+  "sources": [
+    {
+      "brand": "Logitech",
+      "url": "https://www.logitech.com/content/dam/logitech/en_ca/video-collaboration/pdf/webcams-portfolio.pdf"
+    },
+    {
+      "brand": "NexiGo",
+      "url": "https://www.nexigo.com/pages/comparison-table"
+    },
+    {
+      "brand": "EMEET",
+      "url": "https://emeet.com/en-uk/pages/webcam-downloads"
+    },
+    {
+      "brand": "AVerMedia",
+      "url": "https://www.avermedia.com/event/webcams/"
+    },
+    {
+      "brand": "Anker",
+      "url": "https://www.ankerjapan.com/collections/web-camera"
+    },
+    {
+      "brand": "Creative",
+      "url": "https://uk.creative.com/p/webcams"
+    },
+    {
+      "brand": "ASUS",
+      "url": "https://www.asus.com/accessories/webcams/all-series/"
+    },
+    {
+      "brand": "HP",
+      "url": "https://www.hp.com/pl-pl/monitors-accessories/computer-accessories.html"
+    },
+    {
+      "brand": "Dell",
+      "url": "https://www.delltechnologies.com/asset/en-us/products/electronics-and-accessories/industry-market/dell-webcam-competitive-benchmarking-study.pdf"
+    },
+    {
+      "brand": "Lenovo",
+      "url": "https://techtoday.lenovo.com/sites/default/files/2024-09/Lenovo-Audio-and-Video-Brochure.pdf"
+    },
+    {
+      "brand": "Razer",
+      "url": "https://mysupport.razer.com/app/answers/detail/a_id/4104/~/razer-kiyo-pro-%7C-rz19-0364-support-%26-faqs"
+    },
+    {
+      "brand": "JLab",
+      "url": "https://help.jlab.com/collections/webcams"
+    }
+  ]
+}

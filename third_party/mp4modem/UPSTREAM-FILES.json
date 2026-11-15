@@ -1,0 +1,61 @@
+{
+  "repository": "https://github.com/grmchn/mp4modem",
+  "commit": "b3f2d2d1fdbba17104ba473170f7111100e10aea",
+  "files": [
+    {
+      "path": "LICENSE",
+      "gitBlobSha1": "d645695673349e3947e8e5ae42332d0ac3164cd7",
+      "bytes": 11358
+    },
+    {
+      "path": "THIRD_PARTY.md",
+      "gitBlobSha1": "d3b35ef35009154e292f4b8b6d3f74a0b9bb6123",
+      "bytes": 896
+    },
+    {
+      "path": "docs/protocol.md",
+      "gitBlobSha1": "7bd7c21b0b5ce17da83ab3aa9d4242bd16b970e1",
+      "bytes": 12710
+    },
+    {
+      "path": "packages/browser/src/core/basis.ts",
+      "gitBlobSha1": "5d54f03eb53eb915fb721f8b5841ab99d8363e44",
+      "bytes": 8919
+    },
+    {
+      "path": "packages/browser/src/core/binary.ts",
+      "gitBlobSha1": "53880be9561b581a1fe919cf6aabcdba86151500",
+      "bytes": 2783
+    },
+    {
+      "path": "packages/browser/src/core/checksum.ts",
+      "gitBlobSha1": "c9dc699c67b2d568aa9e87daf96015103e9199ea",
+      "bytes": 814
+    },
+    {
+      "path": "packages/browser/src/core/fec.ts",
+      "gitBlobSha1": "5d83dfa717af1e4af2f65bccf5f262cbfb6305f0",
+      "bytes": 3085
+    },
+    {
+      "path": "packages/browser/src/core/reed-solomon.ts",
+      "gitBlobSha1": "cbb56c9cbb0928c3eb4cd6db5f1683baac298f1a",
+      "bytes": 9922
+    },
+    {
+      "path": "packages/browser/src/core/transport.ts",
+      "gitBlobSha1": "c1d1f6f1697d75b6476489290acec08987e17fc3",
+      "bytes": 13329
+    },
+    {
+      "path": "packages/browser/test/core.test.mjs",
+      "gitBlobSha1": "83112a785d3d0a20ce8b2376a3bfa2c10a40f776",
+      "bytes": 5349
+    },
+    {
+      "path": "test-vectors/transport-v2.json",
+      "gitBlobSha1": "17bdf0758f51e542e721cc3acc275a0d30c59cff",
+      "bytes": 1302
+    }
+  ]
+}

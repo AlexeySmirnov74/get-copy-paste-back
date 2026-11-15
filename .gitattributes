@@ -1,0 +1,10 @@
+# Preserve source pins, embedded resources, script BOMs and upstream bytes.
+# Disabling newline conversion still permits normal textual diffs.
+* -text
+*.exe -diff
+*.dll -diff
+*.zip -diff
+*.ico -diff
+*.png -diff
+*.jpg -diff
+*.bin -diff

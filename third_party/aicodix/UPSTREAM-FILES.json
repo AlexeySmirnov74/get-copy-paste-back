@@ -1,0 +1,746 @@
+﻿[
+    {
+        "path":  "modem/analyzer.hh",
+        "bytes":  10791,
+        "sha256":  "e24c4fe94ee5f6265d95873ad41f8689a441fce09494073c023a391025d32d75",
+        "modified":  false
+    },
+    {
+        "path":  "modem/common.hh",
+        "bytes":  7340,
+        "sha256":  "bb0407c7739990950dda592b3b125b82da6f70e6d492c2e4b26defe315a38eff",
+        "modified":  false
+    },
+    {
+        "path":  "modem/decode.cc",
+        "bytes":  4785,
+        "sha256":  "11b01e4d845e9d6cc63aef56c09b980c6832f6f311796ca7630bc8ec755ab86e",
+        "modified":  false
+    },
+    {
+        "path":  "modem/decoder.hh",
+        "bytes":  24136,
+        "sha256":  "e17f23762165d28c1b60d422ce88e15027b5b9d89611ccf7367c2c5a65e70720",
+        "modified":  false
+    },
+    {
+        "path":  "modem/decoder_module.cc",
+        "bytes":  8150,
+        "sha256":  "eeee5c3b57b0c5815e9acfabbebbebec52376879f22d16d4a82765a738a19b4e",
+        "modified":  false
+    },
+    {
+        "path":  "modem/encode.cc",
+        "bytes":  6167,
+        "sha256":  "128527a1568adbc9b3010e15863f0bce9af6bc83e41890c0b4cb3b8942bea6f3",
+        "modified":  false
+    },
+    {
+        "path":  "modem/encoder.hh",
+        "bytes":  7826,
+        "sha256":  "d4d1980261608e7f4693435fec6a8a15a87044d61f57f9d7e7cc868fa3962c60",
+        "modified":  false
+    },
+    {
+        "path":  "modem/encoder_module.cc",
+        "bytes":  2019,
+        "sha256":  "8ce7e637cd125b58d67ece7f9f43073ca56f743e24a1d7591035e207377d1471",
+        "modified":  false
+    },
+    {
+        "path":  "modem/LICENSE",
+        "bytes":  659,
+        "sha256":  "381026e5563c5dce3ef59071627862169216049c25a4a72a77c0f6501bfb2ba5",
+        "modified":  false
+    },
+    {
+        "path":  "modem/Makefile",
+        "bytes":  3229,
+        "sha256":  "e43603560a9bf2345f94498c6bee9cf0676e941b51baf128acc46b362b5312ac",
+        "modified":  false
+    },
+    {
+        "path":  "modem/native.hh",
+        "bytes":  1443,
+        "sha256":  "f59d5db1f4107a36ee78f5fe32b374cc24f609d0591c37d343ca402edd5cb3a0",
+        "modified":  false
+    },
+    {
+        "path":  "modem/polar_tables.hh",
+        "bytes":  121532,
+        "sha256":  "baa32dd52aeb388c419b5f25d74a0099fa3d7f2abd4345b317c58e3c7d42e78d",
+        "modified":  false
+    },
+    {
+        "path":  "modem/psk.hh",
+        "bytes":  2915,
+        "sha256":  "a9917d21901be7cb7bc535d137d894cbe15d5661d522aaa614dff9342de7bfde",
+        "modified":  false
+    },
+    {
+        "path":  "modem/qam.hh",
+        "bytes":  2129,
+        "sha256":  "6893fc470ea4323be99731305e1bf37ab9a17b2eb098eff2957c1546aeb7430f",
+        "modified":  false
+    },
+    {
+        "path":  "modem/quantize.hh",
+        "bytes":  824,
+        "sha256":  "b0ce15e8ec951864dba8f49ea208f7d29cad5cbf3ced1d767adaebc0256c0dfb",
+        "modified":  false
+    },
+    {
+        "path":  "modem/raw_sync.hh",
+        "bytes":  7027,
+        "sha256":  "0443cc8cd02bac8329dbb4da6bd947cd39aa66d154f32172f2681e7e8b3192f3",
+        "modified":  false
+    },
+    {
+        "path":  "modem/README.md",
+        "bytes":  6424,
+        "sha256":  "73db056a14d8a3d44045e9fb54f175e963af2e4845c9135e6929c053e123bd18",
+        "modified":  false
+    },
+    {
+        "path":  "dsp/amd.hh",
+        "bytes":  803,
+        "sha256":  "8b65af554c247b7c959a89c1b4e054f6df91c2ff51d65d5d4d59343719b14ebd",
+        "modified":  false
+    },
+    {
+        "path":  "dsp/atan2.hh",
+        "bytes":  1637,
+        "sha256":  "53caa9cb663822feb4317237c313082cfd29883146f8891d8e44897f1a192842",
+        "modified":  false
+    },
+    {
+        "path":  "dsp/bip_buffer.hh",
+        "bytes":  525,
+        "sha256":  "84771a0df74b0ca454766c1b6259a9c3d047ae9013f97f4a4a09b2e92f188f83",
+        "modified":  false
+    },
+    {
+        "path":  "dsp/biquad.hh",
+        "bytes":  3182,
+        "sha256":  "33c470ad151765ed3241a92dc8bc7068c54d568c2394490901efe5b7c80a4799",
+        "modified":  false
+    },
+    {
+        "path":  "dsp/blockdc.hh",
+        "bytes":  441,
+        "sha256":  "16bd5720bd324059547ed5b1a8b6bc9d9d358a3a34451fb000432422ef911c1e",
+        "modified":  false
+    },
+    {
+        "path":  "dsp/calculus.hh",
+        "bytes":  526,
+        "sha256":  "e4603f4dd4f3cac1d0266ff085adab58ce0d7b0b8e8c0c94f6762ffb62216112",
+        "modified":  false
+    },
+    {
+        "path":  "dsp/cdc.hh",
+        "bytes":  1206,
+        "sha256":  "be14a6ff3dced55935debd7d8d7b34d37ec8fdfe36331b1090943d6b9d3be2e9",
+        "modified":  false
+    },
+    {
+        "path":  "dsp/coeffs.hh",
+        "bytes":  854,
+        "sha256":  "b1bfccabc3c2ea738f6bc864adacb8e48439fae2fa3accb2c851b326b9f0356f",
+        "modified":  false
+    },
+    {
+        "path":  "dsp/complex.hh",
+        "bytes":  3361,
+        "sha256":  "fe40a86529f50ae3c080c895678619639e574880c0142aef3271b061f52af393",
+        "modified":  false
+    },
+    {
+        "path":  "dsp/const.hh",
+        "bytes":  1400,
+        "sha256":  "4c450a305e2583c16aeef5b4f6fd3aeb95a3da0a62a840547b117d2af4a275f4",
+        "modified":  false
+    },
+    {
+        "path":  "dsp/cordic.hh",
+        "bytes":  2344,
+        "sha256":  "e0cd23b0c3f817db9803bb83ab7c4a7fc3c6768c46d20878fc07ba163d990288",
+        "modified":  false
+    },
+    {
+        "path":  "dsp/decibel.hh",
+        "bytes":  866,
+        "sha256":  "defd9a7c21aaaf2b60e1867ff2abb6ccb2b00fe0eb8573f6f61e500d25858bf5",
+        "modified":  false
+    },
+    {
+        "path":  "dsp/delay.hh",
+        "bytes":  404,
+        "sha256":  "0762eb5adddae4e05aa7b96873a19967a2bbcd454adc6204d89ecfd3a7cc363d",
+        "modified":  false
+    },
+    {
+        "path":  "dsp/deque.hh",
+        "bytes":  1028,
+        "sha256":  "8e3533d63b821c79c08629cb2e3fce0f4648c8c3d8bb9261cb81d36373c04795",
+        "modified":  false
+    },
+    {
+        "path":  "dsp/down_conversion.hh",
+        "bytes":  1971,
+        "sha256":  "c678411aee064e45a7e31d331b2054bdebd8678c04431e0ffb951841c88b60ea",
+        "modified":  false
+    },
+    {
+        "path":  "dsp/ema.hh",
+        "bytes":  2621,
+        "sha256":  "a0c5c3658583a65a88712271ae5c2a4a9c8deb8ea3728dd79a96776cc815e96c",
+        "modified":  false
+    },
+    {
+        "path":  "dsp/exp.hh",
+        "bytes":  1107,
+        "sha256":  "adb7ef3c6ded0f8d19c0e51cb64443ffedbef558e3f042527d24c3fe89cca544",
+        "modified":  false
+    },
+    {
+        "path":  "dsp/fdzp.hh",
+        "bytes":  877,
+        "sha256":  "a0d8b75d8cd4a421d722c3e6ca11b090f47f32db3990ff2c786b6a80a358eb07",
+        "modified":  false
+    },
+    {
+        "path":  "dsp/fft.hh",
+        "bytes":  80009,
+        "sha256":  "63a7aec82ed9e2c8fb1008817727dcffefac73c91b51d00049eb4000b990c442",
+        "modified":  false
+    },
+    {
+        "path":  "dsp/filter.hh",
+        "bytes":  2162,
+        "sha256":  "55405f56b47060e452dd8c55feb2004b12d90a2abb41138e30d92f482781c220",
+        "modified":  false
+    },
+    {
+        "path":  "dsp/fir.hh",
+        "bytes":  702,
+        "sha256":  "61ef7bfa781f9b0344bd1f27b8fd521505a4d0685af78af1efbda6ffe106f2cf",
+        "modified":  false
+    },
+    {
+        "path":  "dsp/fmd.hh",
+        "bytes":  2870,
+        "sha256":  "53a3d276fa4094d17e3fb3b583a3a8810cca741feca6c8d662e719caa1f749a6",
+        "modified":  false
+    },
+    {
+        "path":  "dsp/hilbert.hh",
+        "bytes":  1263,
+        "sha256":  "41be097b1036274bfb421102f8d2b8e3fc4b469f6045ca42ff6e6ba2efa5e800",
+        "modified":  false
+    },
+    {
+        "path":  "dsp/kahan.hh",
+        "bytes":  1002,
+        "sha256":  "a1140629b06413965d8dcbfa7148733e054fe04ff6b94040eeb63b43fe238893",
+        "modified":  true
+    },
+    {
+        "path":  "dsp/LICENSE",
+        "bytes":  659,
+        "sha256":  "2a19c88f70e3fc414b05b1e27e849a3b2e6552ea5460361bd61526eaadafc457",
+        "modified":  false
+    },
+    {
+        "path":  "dsp/lms.hh",
+        "bytes":  1610,
+        "sha256":  "052520fba9ce1e3f2f8ba05e48b79dd7025a67b89f50a53e741250e83f1288d4",
+        "modified":  false
+    },
+    {
+        "path":  "dsp/movext.hh",
+        "bytes":  2813,
+        "sha256":  "173e3dda3fe6a668b66e37400a87c5e0480153648dea7f89d81f3fd4a69dba64",
+        "modified":  false
+    },
+    {
+        "path":  "dsp/netpbm.hh",
+        "bytes":  3319,
+        "sha256":  "644eef65fb3b4ee690c1e1e6324355da93081ea1f6e405c0473ecb98678629b1",
+        "modified":  false
+    },
+    {
+        "path":  "dsp/normalize.hh",
+        "bytes":  769,
+        "sha256":  "4563a8813b875e06b4d671ee05a9f5e9a1a8327110fd3f4e5bf930b8080a61f6",
+        "modified":  false
+    },
+    {
+        "path":  "dsp/pcm.hh",
+        "bytes":  644,
+        "sha256":  "ace0405b391f53818c22491957cce9ed2d14610116c660e276b7e98067252928",
+        "modified":  false
+    },
+    {
+        "path":  "dsp/pel.hh",
+        "bytes":  598,
+        "sha256":  "85f07d97314873ce21562055ffb2e6503342812a5effaa29a20e87ff00ec87b1",
+        "modified":  false
+    },
+    {
+        "path":  "dsp/phasor.hh",
+        "bytes":  798,
+        "sha256":  "aac679962e3c3c25075fffabd8b696d2b52e2126576c52113ba2cc444b94d1a7",
+        "modified":  false
+    },
+    {
+        "path":  "dsp/quick.hh",
+        "bytes":  1983,
+        "sha256":  "083f75a85b4593679f465d8ceabf2cc89bc5f4bdff128b5c30b4266712a39e03",
+        "modified":  false
+    },
+    {
+        "path":  "dsp/README.md",
+        "bytes":  13480,
+        "sha256":  "cfab33df1e42dd2afefa25301441f5f3c5001adeb786c7adac9def8c46258b5a",
+        "modified":  false
+    },
+    {
+        "path":  "dsp/regression.hh",
+        "bytes":  1337,
+        "sha256":  "14ecce04041cb0b2ca4c4cb0c45514a8e2040c52b5d7b81226bc7e4b50c69bc6",
+        "modified":  false
+    },
+    {
+        "path":  "dsp/repeated_median.hh",
+        "bytes":  2044,
+        "sha256":  "4b4a27259454f9b271595483ff7f0d6d1d65491c4f625ab08d657c301a6937fa",
+        "modified":  false
+    },
+    {
+        "path":  "dsp/resampler.hh",
+        "bytes":  2934,
+        "sha256":  "e46fea8e0379beb756da567a6bc9c0f011de953edcca414ddef4c4723cdbcf3a",
+        "modified":  false
+    },
+    {
+        "path":  "dsp/sincos.hh",
+        "bytes":  1691,
+        "sha256":  "f756d2d0b4e5f0085874e2b372bf36dd5d3cf2830b46e9d2e939921a210b0e3f",
+        "modified":  false
+    },
+    {
+        "path":  "dsp/sma.hh",
+        "bytes":  1633,
+        "sha256":  "b00c6ed01f3d63737153d8c4c2f1195bd2d54c6947718ed51d94a6a000b70042",
+        "modified":  false
+    },
+    {
+        "path":  "dsp/spline.hh",
+        "bytes":  3663,
+        "sha256":  "38e064b692beed8ec885b57ecf8cbc4fa6a845bd883ba236b075aa67064894fd",
+        "modified":  false
+    },
+    {
+        "path":  "dsp/stack.hh",
+        "bytes":  638,
+        "sha256":  "6c0d8e9b47e69013d202208bfa0956793fc7db5e7a32c591e5b83726763244e7",
+        "modified":  false
+    },
+    {
+        "path":  "dsp/swa.hh",
+        "bytes":  563,
+        "sha256":  "66f3af91a466d10fb33355ebdc0895810335a4b76ca2086fca763d4bbf3924a5",
+        "modified":  false
+    },
+    {
+        "path":  "dsp/theil_sen.hh",
+        "bytes":  1008,
+        "sha256":  "95136c81390f280d27f6bd901c4849ec706cd3fd5898eee5a6daca92a735edfe",
+        "modified":  false
+    },
+    {
+        "path":  "dsp/trigger.hh",
+        "bytes":  1111,
+        "sha256":  "87b9b138f7e5ca98fa1905ebe6085e824554dab95b55b3a6b655af76524f7393",
+        "modified":  false
+    },
+    {
+        "path":  "dsp/unit_circle.hh",
+        "bytes":  2258,
+        "sha256":  "918c4d95fac5574967e93a00a84cda1d16e2db4f76970a20da112db1493aa22b",
+        "modified":  false
+    },
+    {
+        "path":  "dsp/utils.hh",
+        "bytes":  792,
+        "sha256":  "a131fc730d776304d02386ac820b80491bd9c98a09d5d760d0d38f862678cf78",
+        "modified":  false
+    },
+    {
+        "path":  "dsp/wav.hh",
+        "bytes":  6044,
+        "sha256":  "3800c43e2fb0def978a2a1f26b5cc2550933b56f8d09a71bb8f41bde72db2bc1",
+        "modified":  false
+    },
+    {
+        "path":  "dsp/window.hh",
+        "bytes":  3216,
+        "sha256":  "fe96a73e454d52fadd99a1269a221f5474bd67020d7f45953717bcc66ced3d58",
+        "modified":  false
+    },
+    {
+        "path":  "code/avx2.hh",
+        "bytes":  24626,
+        "sha256":  "1728bc8426eab9072c003808572a8ab7400f71dcf11f5e9a31ab0b6c0feb1e19",
+        "modified":  false
+    },
+    {
+        "path":  "code/avx2_double.hh",
+        "bytes":  31216,
+        "sha256":  "665ffe51537c711c52bf1ec160dca2d49cdb0afa33f7ac6020800d4293a2952d",
+        "modified":  false
+    },
+    {
+        "path":  "code/bitman.hh",
+        "bytes":  681,
+        "sha256":  "bbbe9b9f6d7b236b2846d1213f38dd8b1e7d06386b0896f970e0c7a63134faa5",
+        "modified":  false
+    },
+    {
+        "path":  "code/bitstream.hh",
+        "bytes":  2831,
+        "sha256":  "01ccb36997546b7c7d21571c9133f2801bc4e18cc291f1c999f3c1cb2c0e3b57",
+        "modified":  false
+    },
+    {
+        "path":  "code/bose_chaudhuri_hocquenghem_decoder.hh",
+        "bytes":  5469,
+        "sha256":  "1ead3b13d6864036be91e112f3c6bffe1325e7d0dd5f1972d9e1f7f664bc9b8f",
+        "modified":  false
+    },
+    {
+        "path":  "code/bose_chaudhuri_hocquenghem_encoder.hh",
+        "bytes":  4121,
+        "sha256":  "a31350e18f137ae9ac99c16b692426d7411928eb689d378b0421d94cf639cd47",
+        "modified":  false
+    },
+    {
+        "path":  "code/cauchy_fermat_erasure_coding.hh",
+        "bytes":  3704,
+        "sha256":  "547067a657bbabf3381be05bd999887959804b9ae521c432ca8c5865d280e8c5",
+        "modified":  false
+    },
+    {
+        "path":  "code/cauchy_prime_field_erasure_coding.hh",
+        "bytes":  1802,
+        "sha256":  "fdfd32a0ccf50d2918242cfe3ac4fac7366549f1c1ad3b65e3a59b030b4cfaa3",
+        "modified":  false
+    },
+    {
+        "path":  "code/cauchy_reed_solomon_erasure_coding.hh",
+        "bytes":  15858,
+        "sha256":  "ad1057d2d35cd0cf01234da03c618c82bcc57a7c463868ac2376c1549d7ae629",
+        "modified":  false
+    },
+    {
+        "path":  "code/crc.hh",
+        "bytes":  1531,
+        "sha256":  "ce21b8e6264cffe7150b480ccf71941a2ae6fbe258346ffc5975fa51bd0e971a",
+        "modified":  false
+    },
+    {
+        "path":  "code/exclusive_reduce.hh",
+        "bytes":  490,
+        "sha256":  "6702a73e8fc53f1470eeb287c60cde619dab7533a3112557d2541e60f94aa76b",
+        "modified":  false
+    },
+    {
+        "path":  "code/galois_field.hh",
+        "bytes":  10758,
+        "sha256":  "01b97c3b0771b7e1ae1519d769208ed4934b318b99009b5c794ec10a5ca804f7",
+        "modified":  false
+    },
+    {
+        "path":  "code/hadamard_decoder.hh",
+        "bytes":  2778,
+        "sha256":  "ae53750d5bbc938f5eb68a4fff0619ce0b71f9122a0ccd732f15d4e99fc9cbbe",
+        "modified":  false
+    },
+    {
+        "path":  "code/hadamard_encoder.hh",
+        "bytes":  581,
+        "sha256":  "6823d3ae0078bea9e4f72c9a3535c06fb6f9073578ffade4d23ff4a9182f7b74",
+        "modified":  false
+    },
+    {
+        "path":  "code/interleave.hh",
+        "bytes":  698,
+        "sha256":  "01b0620918243c4374589c4fffab90e082a983e2897bbde51a52119213db76ea",
+        "modified":  false
+    },
+    {
+        "path":  "code/ldpc_decoder.hh",
+        "bytes":  6933,
+        "sha256":  "026ec05ea739a780e6fdc19503454afe7b477a983716424925bbecde187ed7c2",
+        "modified":  false
+    },
+    {
+        "path":  "code/ldpc_encoder.hh",
+        "bytes":  1483,
+        "sha256":  "2733cfcf341726db8c1ad3e1e42aeca5f4cef98af7dae79ef3c524fc3b5c7b05",
+        "modified":  false
+    },
+    {
+        "path":  "code/lehmer_rng.hh",
+        "bytes":  646,
+        "sha256":  "43365ff94543ac437727360f8884018343738cde5d353690c5aed6e997a66a7b",
+        "modified":  false
+    },
+    {
+        "path":  "code/LICENSE",
+        "bytes":  659,
+        "sha256":  "2a19c88f70e3fc414b05b1e27e849a3b2e6552ea5460361bd61526eaadafc457",
+        "modified":  false
+    },
+    {
+        "path":  "code/mersenne_horner_check.hh",
+        "bytes":  579,
+        "sha256":  "0aca79c061a9e9198f300eb8cccb26ac29c86a4a544b6cd4be88d6f5b7037c3a",
+        "modified":  false
+    },
+    {
+        "path":  "code/mersenne_packing.hh",
+        "bytes":  2457,
+        "sha256":  "d57f151713f9e1859ddb9ad36f29e8aabf79c1433b666d497a2fb12bba8cea5b",
+        "modified":  false
+    },
+    {
+        "path":  "code/mls.hh",
+        "bytes":  798,
+        "sha256":  "2c066b1159f1abbdba0c758145c029ad7f3fe3829eedc0b3d1ec209f174dfa9f",
+        "modified":  false
+    },
+    {
+        "path":  "code/neon.hh",
+        "bytes":  18329,
+        "sha256":  "d283d035c3524d6e35b35395439fc78b94dc53af0ce9a7de5e5bea68429fea97",
+        "modified":  false
+    },
+    {
+        "path":  "code/neon_double.hh",
+        "bytes":  23142,
+        "sha256":  "c0641542096b2220eca6e1653dc09c6b3d614df6361a64e512cb74654c5325c8",
+        "modified":  false
+    },
+    {
+        "path":  "code/neon_quadruple.hh",
+        "bytes":  23282,
+        "sha256":  "f219fc247237c09c112dd08e85776ee3e0019a5ae1e6a017bc7abf49a06c67e5",
+        "modified":  false
+    },
+    {
+        "path":  "code/neon_triple.hh",
+        "bytes":  23283,
+        "sha256":  "094abbe98ba5f69fb29217b574d762bbf4b0384132f051b0218b0d82b13486d9",
+        "modified":  false
+    },
+    {
+        "path":  "code/osd.hh",
+        "bytes":  9514,
+        "sha256":  "fb385202b232076c5dc317662e78cf619121d0195745db6fa616c547e2fb0bcb",
+        "modified":  false
+    },
+    {
+        "path":  "code/pac_encoder.hh",
+        "bytes":  1253,
+        "sha256":  "c9a7dd34d08da11b1618b1be9fec56729f0afd054045d00e97824d05c7c4dade",
+        "modified":  false
+    },
+    {
+        "path":  "code/pac_list_decoder.hh",
+        "bytes":  5245,
+        "sha256":  "204c4521ee863406f656bccfe74b904681d1bba957dd217a04526163a0db635b",
+        "modified":  false
+    },
+    {
+        "path":  "code/permute.hh",
+        "bytes":  1052,
+        "sha256":  "c030a01fe2464ee26463c415525b24ecfb993dcf3ea130e5b4dfc008a1d1774c",
+        "modified":  false
+    },
+    {
+        "path":  "code/polar_decoder.hh",
+        "bytes":  9045,
+        "sha256":  "9e052b721527168bf6dc2f781eea00f2921658b2ac95de4ee5784495158610d8",
+        "modified":  false
+    },
+    {
+        "path":  "code/polar_encoder.hh",
+        "bytes":  1972,
+        "sha256":  "26710eeee683b7531ba3ae8e722605dda5e8708d5b40ce9d5d7228d12f8b801f",
+        "modified":  false
+    },
+    {
+        "path":  "code/polar_freezer.hh",
+        "bytes":  4044,
+        "sha256":  "27701ce9b517aa1cef00bf8aea79c754bc0d11a04c975771ee8b303cd3153c12",
+        "modified":  false
+    },
+    {
+        "path":  "code/polar_helper.hh",
+        "bytes":  5739,
+        "sha256":  "f30e222b562908a16833bc115cfeef5e13b700f001d33bbb15588adc02e83c87",
+        "modified":  false
+    },
+    {
+        "path":  "code/polar_list_decoder.hh",
+        "bytes":  11442,
+        "sha256":  "de5870f7e4c7061014989f22f26ff79caa0a2a9ce8712a57262f6b3df34ca871",
+        "modified":  false
+    },
+    {
+        "path":  "code/polar_parity_aided.hh",
+        "bytes":  14098,
+        "sha256":  "ba266dea2850ad5ce864325c053270f0885aad0931fdc10c254b2da91d808c33",
+        "modified":  false
+    },
+    {
+        "path":  "code/polar_sequence.hh",
+        "bytes":  3125,
+        "sha256":  "2ec1857023dcdd861cba52d7caa9b7853fdb320ea9ab6dbab3d823aed0eb9ce1",
+        "modified":  false
+    },
+    {
+        "path":  "code/prime_field.hh",
+        "bytes":  5320,
+        "sha256":  "9227cb8d52356652d1148c518de9b6be186bbb91795fe22f227c069736b24086",
+        "modified":  false
+    },
+    {
+        "path":  "code/README.md",
+        "bytes":  8432,
+        "sha256":  "ed584eb75aefd32c6343ed9dc7bee3ac2b8c19832d41d37e3ab046312a9386a0",
+        "modified":  false
+    },
+    {
+        "path":  "code/reed_solomon_decoder.hh",
+        "bytes":  3134,
+        "sha256":  "5adcee0b3d63ae2aeb8bdb3c5fa8d6d9da013c1fc8c66701b84831851699e7d8",
+        "modified":  false
+    },
+    {
+        "path":  "code/reed_solomon_encoder.hh",
+        "bytes":  1982,
+        "sha256":  "16cb243abcb7f261e81f524a1c53943ee0a81c4ff0ce1989f90c41c5c71af3cc",
+        "modified":  false
+    },
+    {
+        "path":  "code/reed_solomon_error_correction.hh",
+        "bytes":  7375,
+        "sha256":  "3d10fd90097de68ced34070efdc75a51c03ac01a8e38007a7729125f643c358e",
+        "modified":  false
+    },
+    {
+        "path":  "code/rotate.hh",
+        "bytes":  2868,
+        "sha256":  "06019bce35ef985f5cba3a14665821113162c4410d1b61c8a945c6c7f0128aa7",
+        "modified":  false
+    },
+    {
+        "path":  "code/short_bch_code_decoder.hh",
+        "bytes":  2745,
+        "sha256":  "d2cb40d89b1d70eeef5ff09c90f4c05b3d7bfa02ae44ef73dd1f7e1c1b6ffe6a",
+        "modified":  false
+    },
+    {
+        "path":  "code/short_bch_code_encoder.hh",
+        "bytes":  848,
+        "sha256":  "628779e383d655849e811ecf0258fa8015a7c4ac4171a787184a3eab8b02785e",
+        "modified":  false
+    },
+    {
+        "path":  "code/simd.hh",
+        "bytes":  36136,
+        "sha256":  "21663e88c14091889d8e87da52430e1680b4afb77dc9ac3f3d76cbb1b9df85f6",
+        "modified":  false
+    },
+    {
+        "path":  "code/simd_sort.hh",
+        "bytes":  495,
+        "sha256":  "4bc700756cfad18e041197fc33fdc6eb51d7cc6615342dbe15d4cdacee422810",
+        "modified":  false
+    },
+    {
+        "path":  "code/simd128.hh",
+        "bytes":  18482,
+        "sha256":  "7d82ad99f371a0baa55476222896359994a136c3ed42cb5d488a8e856aea7ee9",
+        "modified":  false
+    },
+    {
+        "path":  "code/simd128_double.hh",
+        "bytes":  22879,
+        "sha256":  "3990af50693bca199edee127fa4e1a3c6f7b3560e6227de787d7acf88320d878",
+        "modified":  false
+    },
+    {
+        "path":  "code/simd128_quadruple.hh",
+        "bytes":  23019,
+        "sha256":  "a97cdd0db5d37a2e282f707e83f2304a6a25230e9cc6efd38b98e0fc0ce93d13",
+        "modified":  false
+    },
+    {
+        "path":  "code/simd128_triple.hh",
+        "bytes":  23020,
+        "sha256":  "025f398100c1de911b1d76488ca93b9a91681aaaba5aeadb0cdf040f7d0750fe",
+        "modified":  false
+    },
+    {
+        "path":  "code/simplex_decoder.hh",
+        "bytes":  3906,
+        "sha256":  "bffd40e31739f0d8caf9eeaf18531fe2040dec126706d0a6dc301d5fc06e6b59",
+        "modified":  false
+    },
+    {
+        "path":  "code/simplex_encoder.hh",
+        "bytes":  568,
+        "sha256":  "99aeead6a9e8e5141ed05363e6886ccb6f1a3600e3673a746f08bb87fba688fb",
+        "modified":  false
+    },
+    {
+        "path":  "code/sort.hh",
+        "bytes":  1618,
+        "sha256":  "bd0c77f23a65ddcd901a8a616d15a85d0fedb0afc4fd2ba6cb33424d8ab5f637",
+        "modified":  false
+    },
+    {
+        "path":  "code/sse4_2.hh",
+        "bytes":  22500,
+        "sha256":  "7fff837b0c062d3839d1a5ba482e8d12bb45bfefe1992d67781c4d0e8bd567b8",
+        "modified":  false
+    },
+    {
+        "path":  "code/sse4_2_double.hh",
+        "bytes":  27757,
+        "sha256":  "4870efda58f7d84130dfe13aadb8a3a9e26e97f252fd0b7c0cbb10d3d1cee63b",
+        "modified":  false
+    },
+    {
+        "path":  "code/sse4_2_quadruple.hh",
+        "bytes":  28469,
+        "sha256":  "a6f0cf34dc71354934fec3d201b21284830f6afd7fe0dc73f0f174bb65e65315",
+        "modified":  false
+    },
+    {
+        "path":  "code/sse4_2_triple.hh",
+        "bytes":  28188,
+        "sha256":  "056e90b6cfe3a0384a9b39719b24fb1fdcdbd20a21de07fa8492524eca9d6a74",
+        "modified":  false
+    },
+    {
+        "path":  "code/xorshift.hh",
+        "bytes":  3188,
+        "sha256":  "af1e63f379d84c29d26396b4fc668e79b1967e22fb7fa1673cb35b1acfac59fa",
+        "modified":  false
+    }
+]
