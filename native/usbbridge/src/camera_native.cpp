@@ -131,7 +131,7 @@ ComPtr<IBaseFilter> camera(const wchar_t* path) {
             ComPtr<IBaseFilter> filter;
             if(_wcsnicmp(path,L"\\\\?\\usb#",8)==0){
                 // Use the Windows WDM proxy for USB capture. The per-device MF bridge
-                // can stay indefinitely intermediate with no samples (e.g. Chicony B729).
+                // can stay indefinitely intermediate with no samples on some camera drivers.
                 // Load only this enumerated device's property bag; no registry/policy edits.
                 const CLSID proxy={0x17CCA71B,0xECD7,0x11D0,{0xB9,0x08,0x00,0xA0,0xC9,0x22,0x31,0x96}};
                 check(CoCreateInstance(proxy,nullptr,CLSCTX_INPROC_SERVER,IID_PPV_ARGS(&filter)));

@@ -44,7 +44,7 @@ You need Windows x64 on both sides, a Horizon session with camera/RTAV and playb
 
 ### Automatic camera discovery in 0.6.40
 
-Automatic discovery skips other unsaved camera names, including **Chicony USB2.0 Camera**. A physical camera with a catalog name can still activate briefly: the name filters candidates, it does not prove their identity. Each candidate gets a finite pass through up to five DirectShow/Media Foundation compatibility modes. To retry an exhausted candidate, turn automatic selection off and on, or restart the client; a new device ID can still be discovered later.
+Automatic discovery skips other unsaved camera names. A physical camera with a catalog name can still activate briefly: the name filters candidates, it does not prove their identity. Each candidate gets a finite pass through up to five DirectShow/Media Foundation compatibility modes. To retry an exhausted candidate, turn automatic selection off and on, or restart the client; a new device ID can still be discovered later.
 
 The limit is **five capture opens per exact device ID** in an automatic discovery cycle, including compatibility retries and source-format refreshes while the candidate is unverified. A failed candidate stays exhausted through later device-list refreshes and disappearance/reappearance of that same ID. Switching automatic selection off and on, or restarting the client, starts a fresh cycle; a newly appearing ID has its own budget.
 

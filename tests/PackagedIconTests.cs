@@ -42,8 +42,8 @@ internal static class PackagedIconTests
         Type catalog = assembly.GetType("HorizonClient.CameraNames");
         Check(catalog != null, "Both distributed executables must include the shared discovery catalog.");
         var catalogNames = (System.Collections.IList)catalog.GetProperty("Names", BindingFlags.Static | BindingFlags.NonPublic).GetValue(null, null);
-        Check(catalogNames.Count == 100 && catalogNames.Contains("Elgato Facecam MK.2") && !catalogNames.Contains("Chicony USB2.0 Camera"),
-            "The compiled discovery catalog includes the server's suggested camera identities and excludes the observed unrelated Chicony.");
+        Check(catalogNames.Count == 100 && catalogNames.Contains("Elgato Facecam MK.2") && !catalogNames.Contains("Noncatalog Built-in Camera"),
+            "The compiled discovery catalog includes the server's suggested camera identities and excludes unrelated camera names.");
         byte[] tray;
         using (Stream stream = assembly.GetManifestResourceStream("HorizonClient.Tray.ico"))
         {

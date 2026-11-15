@@ -44,7 +44,7 @@ internal static class ReceiverAutoCameraTests
     {
         using (var fixture = new Fixture())
         {
-            fixture.Devices[0] = new CameraDevice("Chicony USB2.0 Camera", "ordinary");
+            fixture.Devices[0] = new CameraDevice("Noncatalog Built-in Camera", "ordinary");
             fixture.Devices.Add(new CameraDevice("Elgato Facecam MK.2 (redirected)", "catalog-substring"));
             fixture.Devices.Add(new CameraDevice("Horizon virtual camera", "persuasive-name"));
             fixture.Devices[1] = new CameraDevice("rAzEr kIyO pRo", "ours");
@@ -65,7 +65,7 @@ internal static class ReceiverAutoCameraTests
         }
         using (var fixture = new Fixture())
         {
-            fixture.Devices.Clear(); fixture.Devices.Add(new CameraDevice("Chicony USB2.0 Camera", "ordinary"));
+            fixture.Devices.Clear(); fixture.Devices.Add(new CameraDevice("Noncatalog Built-in Camera", "ordinary"));
             fixture.Services.PreferredCameraIds = new[] { "ordinary" };
             using (ReceiverContext receiver = fixture.Create())
             {

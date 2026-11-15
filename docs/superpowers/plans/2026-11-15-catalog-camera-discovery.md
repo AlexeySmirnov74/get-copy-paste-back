@@ -10,7 +10,7 @@
 
 ## Constraints and review focus
 
-- Noncatalog cameras such as Chicony must have zero automatic opens; a saved exact ID or explicit manual selection remains usable even with a custom noncatalog name.
+- Noncatalog built-in cameras must have zero automatic opens; a saved exact ID or explicit manual selection remains usable even with a custom noncatalog name.
 - Saved Device ID takes priority over enumeration order or optional preference hints. Device names use the shared catalog's case-insensitive exact matching, not substrings.
 - Retain finite DirectShow/Media Foundation compatibility fallback per candidate; exhausting it stops automatic reopening until an explicit retry/reset or process restart. Ordinary refreshes cannot reset exhaustion. Newly appearing Device IDs remain eligible.
 - Probe frames do not publish clipboard data or acknowledge delivery. Stale callbacks cannot override a user's manual choice or an automatic-selection toggle.
@@ -26,7 +26,7 @@
 
 ## Validation record
 
-Baseline: published 0.6.39 passed the full configured suite. Before this change, discovery opened all enumerated camera names and cleared its attempted set every five seconds; the supplied logs demonstrated five Chicony opens. Regression fixtures exercise eligibility and actual capture-open boundaries rather than merely inspect source text.
+Baseline: published 0.6.39 passed the full configured suite. Before this change, discovery opened all enumerated camera names and cleared its attempted set every five seconds; the supplied logs demonstrated five opens of an unrelated built-in camera. Regression fixtures exercise eligibility and actual capture-open boundaries rather than merely inspect source text.
 
 The isolated receiver fixture reproduced the catalog failure before implementation and passed 244 assertions after the fix. Mutation checks correctly failed when allowing a sixth unverified open, clearing unrelated exhausted IDs after successful identification, or omitting the identified source's own retry reset. A separate actual-EXE check reproduced the missing client catalog in 0.6.39. Independent source review approved eligibility at the capture boundary, retry/reset rules, compatibility fallback, and stale-callback guards. All fixture inputs are synthetic, with isolated settings and fake capture services.
 
