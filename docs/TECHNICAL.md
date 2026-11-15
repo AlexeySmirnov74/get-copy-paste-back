@@ -100,6 +100,10 @@ The figures below are **calculated payload ceilings at 30 data frames/s**, using
 
 Color modes use black, red, yellow and blue cells to carry **two bits per cell**. Reference colors in each frame calibrate decoding; metadata and payload share a CRC32 check. They require the redirected video to preserve enough color detail. Larger nominal capacity does not guarantee a faster connection: use the verified speed test to choose a working mode.
 
+![Four-color video encoding: black, red, yellow and blue cells carry two bits each; four cells form one byte. The decoder calibrates the palette, reconstructs the packet and verifies CRC32.](color-video-encoding.png)
+
+The diagram follows [ColorVideoProtocol.cs](../src/ColorVideoProtocol.cs). The illustrated frame uses the 720p mode with 8-pixel cells; it is a packet example, not a throughput measurement.
+
 ### Measured one-session examples
 
 An earlier documented real Horizon session capturing **1920×1080** produced these **100 KiB verified-file test results**. They measure file reception time, excluding the wait for the return audio report; they are examples from that session, not guaranteed rates:
